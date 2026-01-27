@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:alex_snaps/Strings.dart';
+import 'Strings.dart';
+import 'Assets.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({required this.photo, super.key});
@@ -51,7 +52,7 @@ class LandingPage extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(bottom: 50),
                 child: SvgPicture.asset(
-                    'assets/icons/arrow-down-circle-svgrepo-com.svg',
+                    Assets.icons.Arrow_with_circle,
                   width: 40,
                   height: 40,
                   colorFilter: ColorFilter.mode(Color(0xFF60C2C6), BlendMode.srcIn),
