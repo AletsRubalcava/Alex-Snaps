@@ -16,47 +16,43 @@ class LandingPage extends StatelessWidget {
         body: Stack(
           children: [
             Positioned.fill(child: Image.asset(photo, fit: BoxFit.cover)),
-            Align(
-                alignment: Alignment.bottomCenter,
-                child: FractionallySizedBox(
-                    heightFactor: 0.5,
-                    widthFactor: 1,
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [Colors.transparent, Color(0x802D2D2D),Color(0xFF2D2D2D)],
-                              stops: [0.0, 0.45, 1]
-                          ),
-                        )
+            Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: MediaQuery.of(context).size.height*0.5,
+                child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [Colors.transparent, Color(0x802D2D2D),Color(0xFF2D2D2D)],
+                          stops: [0.0, 0.45, 1]
+                      ),
                     )
                 )
             ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Padding(
-                  padding: EdgeInsets.only(left: 25, bottom: 130),
-                  child: Text(
-                    Strings.Landing_page_quote,
-                    style: GoogleFonts.leagueGothic(
-                      fontSize: 48,
-                      color: Colors.white,
-                    ),
-                  ),
-              )
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: EdgeInsets.only(bottom: 50),
-                child: SvgPicture.asset(
-                    Assets.icons.Arrow_with_circle,
-                  width: 40,
-                  height: 40,
-                  colorFilter: ColorFilter.mode(Color(0xFF60C2C6), BlendMode.srcIn),
+            Positioned(
+              left: 25,
+              right: 25,
+              bottom: 130,
+              child: Text(
+                Strings.Landing_page_quote,
+                style: GoogleFonts.leagueGothic(
+                  fontSize: 48,
+                  color: Colors.white,
                 ),
+              ),
+            ),
+            Positioned(
+              bottom: 50,
+              left: 0,
+              right: 0,
+              child: SvgPicture.asset(
+                Assets.icons.Arrow_with_circle,
+                width: 40,
+                height: 40,
+                colorFilter: ColorFilter.mode(Color(0xFF60C2C6), BlendMode.srcIn),
               ),
             )
           ]
