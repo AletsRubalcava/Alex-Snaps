@@ -5,6 +5,7 @@ class Assets {
 
 class AppIcons{
   final String Arrow_with_circle = 'assets/icons/Arrow_with_circle.svg';
+  final String Alex_Snaps_Logo = 'assets/icons/Alex_Snaps_Logo.svg';
 }
 
 class AppImages{

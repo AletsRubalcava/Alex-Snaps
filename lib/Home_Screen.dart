@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'Assets.dart';
+import 'Strings.dart';
 
 class HomeScreen extends StatelessWidget{
   const HomeScreen({super.key});
@@ -26,13 +28,13 @@ class HomeScreen extends StatelessWidget{
                 spacing: 20,
                 children: [
                   SvgPicture.asset(
-                    'assets/icons/Alex_Snaps_Logo.svg',
-                      colorFilter: ColorFilter.mode(Color(0xFF60C2C6), BlendMode.srcIn),
-                      height: 35,
-                      width: 35,
-                    ),
+                    Assets.icons.Alex_Snaps_Logo,
+                    colorFilter: ColorFilter.mode(Color(0xFF60C2C6), BlendMode.srcIn),
+                    height: 35,
+                    width: 35,
+                  ),
                   Text(
-                      'ALEX SNAPS',
+                    Strings.App_Name,
                     style: GoogleFonts.leagueGothic(
                       fontSize: 30,
                       color: Color(0xFF60C2C6)
