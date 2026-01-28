@@ -1,6 +1,7 @@
 import 'package:alex_snaps/Landing_Page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:alex_snaps/Home_Screen.dart';
 import 'Assets.dart';
 
 class ScrollVertical extends StatelessWidget{
@@ -19,15 +20,6 @@ class ScrollVertical extends StatelessWidget{
   }
   List<Widget> pages = [
     LandingPage(photo: Assets.images.Landing_page_image),
-    SizedBox(
-      height: double.infinity,
-      width: double.infinity,
-      child: Card(
-        color: Colors.green,
-        child: Center(
-          child: Text('Screen 2'),
-        ),
-      ),
-    )
+    HomeScreen()
   ];
 }
