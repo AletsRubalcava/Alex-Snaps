@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:alex_snaps/Landing_Page.dart';
+import 'Scroll_Vertical.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LandingPage(photo: 'assets/images/IMG_0790.jpg')
+      home: ScrollVertical()
     );
   }
 }

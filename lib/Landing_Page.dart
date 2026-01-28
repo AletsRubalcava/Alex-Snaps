@@ -14,7 +14,7 @@ class LandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
-          children: [
+            children: [
             Positioned.fill(child: Image.asset(photo, fit: BoxFit.cover)),
             Positioned(
                 bottom: 0,
