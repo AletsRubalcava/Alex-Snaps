@@ -49,7 +49,7 @@ class LandingPage extends StatelessWidget {
               left: 0,
               right: 0,
               child: SvgPicture.asset(
-                Assets.icons.Arrow_with_circle,
+                Assets.icons.arrow_down_circle,
                 width: 40,
                 height: 40,
                 colorFilter: ColorFilter.mode(Color(0xFF60C2C6), BlendMode.srcIn),

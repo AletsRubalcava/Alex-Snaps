@@ -4,7 +4,8 @@ class Assets {
 }
 
 class AppIcons{
-  final String Arrow_with_circle = 'assets/icons/Arrow_with_circle.svg';
+  final String arrow_down_circle = 'assets/icons/arrow-down-circle.svg';
+  final String arrow_right_circle = 'assets/icons/arrow-right-circle.svg';
   final String Alex_Snaps_Logo = 'assets/icons/Alex_Snaps_Logo.svg';
 }
 

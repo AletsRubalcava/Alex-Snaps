@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'Assets.dart';
 import 'Strings.dart';
+import 'package:alex_snaps/Home_Photo_Button.dart';
 
 class HomeScreen extends StatelessWidget{
   const HomeScreen({super.key});
@@ -41,6 +42,14 @@ class HomeScreen extends StatelessWidget{
                     ),
                   )
                 ]
+              )
+          ),
+          Center(
+              child: HomePhotoButton(
+                  photo: 'assets/images/IMG_0701.jpg',
+                  width: 300,
+                  height: 300,
+                  text: 'VIEW ALL'
               )
           )
         ],
