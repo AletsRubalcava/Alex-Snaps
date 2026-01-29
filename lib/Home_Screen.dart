@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,7 +22,6 @@ class HomeScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.only(top: 45, left: 30, right: 30),
         child: Column(
-          spacing: 40,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,36 +44,79 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
+            Padding(
+              padding: EdgeInsetsGeometry.only(top: 15),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'HOME',
+                  style: GoogleFonts.leagueGothic(
+                    color: Colors.white,
+                    fontSize: 40,
+                  ),
+                ),
+              ),
+            ),
             HomePhotoButton(
               photo: 'assets/images/IMG_0701.jpg',
               width: MediaQuery.of(context).size.width * 0.85,
               height: MediaQuery.of(context).size.width * 0.85,
               text: 'VIEW ALL',
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                HomePhotoButton(
-                  photo: 'assets/images/IMG_1661.jpg',
-                  width: 100,
-                  height: 150,
-                  text: 'VASCONCELOS',
+            Padding(
+              padding: EdgeInsetsGeometry.symmetric(vertical: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  HomePhotoButton(
+                    photo: 'assets/images/IMG_1661.jpg',
+                    width: 100,
+                    height: 150,
+                    text: 'VASCONCELOS',
+                  ),
+                  HomePhotoButton(
+                    photo: 'assets/images/IMG_1781.jpg',
+                    width: 100,
+                    height: 150,
+                    text: 'WILDLIFE',
+                  ),
+                  HomePhotoButton(
+                    photo: 'assets/images/IMG_0775.jpg',
+                    width: 100,
+                    height: 150,
+                    text: 'VERACRUZ',
+                  ),
+                ],
+              ),
+            ),
+            ClipRRect(
+              borderRadius: BorderRadiusGeometry.circular(20),
+              child: Container(
+                height: 50,
+                width: double.infinity,
+                color: Color(0xFF5D5D5D),
+                child: Center(
+                  child: Text(
+                    'LEARN ABOUT ME',
+                    style: GoogleFonts.leagueGothic(
+                      color: Colors.white,
+                      fontSize: 30,
+                    ),
+                  ),
                 ),
-                HomePhotoButton(
-                  photo: 'assets/images/IMG_1781.jpg',
-                  width: 100,
-                  height: 150,
-                  text: 'WILDLIFE',
-                ),
-                HomePhotoButton(
-                  photo: 'assets/images/IMG_0775.jpg',
-                  width: 100,
-                  height: 150,
-                  text: 'VERACRUZ',
-                ),
-              ],
+              ),
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: FractionallySizedBox(
+        heightFactor: 0.1,
+        child: ClipRRect(
+          borderRadius: BorderRadiusGeometry.only(
+            topLeft: Radius.circular(25),
+            topRight: Radius.circular(25),
+          ),
+          child: Container(color: Color(0xFF60C2C6)),
         ),
       ),
     );
