@@ -7,53 +7,75 @@ import 'Assets.dart';
 import 'Strings.dart';
 import 'package:alex_snaps/Home_Photo_Button.dart';
 
-class HomeScreen extends StatelessWidget{
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarIconBrightness: Brightness.light
-      )
+      SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light),
     );
 
     return Scaffold(
       backgroundColor: Color(0xFF2D2D2D),
-      body: Stack(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: 45, left: 30, right: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                spacing: 20,
-                children: [
-                  SvgPicture.asset(
-                    Assets.icons.Alex_Snaps_Logo,
-                    colorFilter: ColorFilter.mode(Color(0xFF60C2C6), BlendMode.srcIn),
-                    height: 35,
-                    width: 35,
+      body: Padding(
+        padding: EdgeInsets.only(top: 45, left: 30, right: 30),
+        child: Column(
+          spacing: 40,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SvgPicture.asset(
+                  Assets.icons.Alex_Snaps_Logo,
+                  colorFilter: ColorFilter.mode(
+                    Color(0xFF60C2C6),
+                    BlendMode.srcIn,
                   ),
-                  Text(
-                    Strings.App_Name,
-                    style: GoogleFonts.leagueGothic(
-                      fontSize: 30,
-                      color: Color(0xFF60C2C6)
-                    ),
-                  )
-                ]
-              )
-          ),
-          Center(
-              child: HomePhotoButton(
-                  photo: 'assets/images/IMG_0701.jpg',
-                  width: 300,
-                  height: 300,
-                  text: 'VIEW ALL'
-              )
-          )
-        ],
-      )
+                  height: 35,
+                  width: 35,
+                ),
+                Text(
+                  Strings.App_Name,
+                  style: GoogleFonts.leagueGothic(
+                    fontSize: 30,
+                    color: Color(0xFF60C2C6),
+                  ),
+                ),
+              ],
+            ),
+            HomePhotoButton(
+              photo: 'assets/images/IMG_0701.jpg',
+              width: MediaQuery.of(context).size.width * 0.85,
+              height: MediaQuery.of(context).size.width * 0.85,
+              text: 'VIEW ALL',
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                HomePhotoButton(
+                  photo: 'assets/images/IMG_1661.jpg',
+                  width: 100,
+                  height: 150,
+                  text: 'VASCONCELOS',
+                ),
+                HomePhotoButton(
+                  photo: 'assets/images/IMG_1781.jpg',
+                  width: 100,
+                  height: 150,
+                  text: 'WILDLIFE',
+                ),
+                HomePhotoButton(
+                  photo: 'assets/images/IMG_0775.jpg',
+                  width: 100,
+                  height: 150,
+                  text: 'VERACRUZ',
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
