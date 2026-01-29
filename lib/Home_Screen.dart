@@ -47,8 +47,8 @@ class HomeScreen extends StatelessWidget{
           Center(
               child: HomePhotoButton(
                   photo: 'assets/images/IMG_0701.jpg',
-                  width: 300,
-                  height: 300,
+                  width: 600,
+                  height: 600,
                   text: 'VIEW ALL'
               )
           )

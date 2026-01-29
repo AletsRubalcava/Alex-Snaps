@@ -30,21 +30,21 @@ class HomePhotoButton extends StatelessWidget{
               Positioned.fill(
                   child: Image.asset(photo, fit: BoxFit.cover)
               ),
-              Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  height: MediaQuery.of(context).size.height*0.1,
-                  child: Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [Colors.transparent, Color(0x8060C2C6),Color(0xFF60C2C6)],
-                            stops: [0.0, 0.75, 1]
-                        ),
-                      )
-                  )
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: FractionallySizedBox(
+                    heightFactor: 0.4,
+                    child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [Colors.transparent, Color(0x8060C2C6),Color(0xFF60C2C6)],
+                              stops: [0.0, 0.75, 1]
+                          ),
+                        )
+                    )
+                )
               ),
               Positioned(
                 bottom: 6,
