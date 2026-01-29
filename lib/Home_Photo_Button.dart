@@ -48,23 +48,19 @@ class HomePhotoButton extends StatelessWidget{
               ),
               Positioned(
                 bottom: 6,
-                  left: 30,
-                  child: Text(
-                    text,
-                    style: GoogleFonts.leagueGothic(
-                      fontSize: 40,
-                      color: Colors.white
-                    ),
-                  )
-              ),
-              Positioned(
-                  bottom: 21,
-                  left: 145,
-                  child: SvgPicture.asset(
-                    Assets.icons.arrow_right_circle,
-                    width: 25,
-                    colorFilter: ColorFilter.mode(Color(0xFF60C2C6), BlendMode.srcIn),
-                  )
+                left: width*0.1,
+                right: 30,
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return Text(
+                      text,
+                      style: GoogleFonts.leagueGothic(
+                        fontSize: constraints.maxWidth * 0.2,
+                        color: Colors.white,
+                      ),
+                    );
+                  },
+                ),
               )
             ]
         )
