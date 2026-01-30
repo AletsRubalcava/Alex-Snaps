@@ -66,36 +66,36 @@ class HomeScreen extends StatelessWidget {
             ),
             Spacer(),
             Row(
-                spacing: 10,
-                children: [
-                  Flexible(
-                    child: AspectRatio(
-                      aspectRatio: 4/5,
-                      child: HomePhotoButton(
-                        photo: 'assets/images/IMG_1661.jpg',
-                        text: 'VASCONCELOS',
-                      ),
+              spacing: 10,
+              children: [
+                Flexible(
+                  child: AspectRatio(
+                    aspectRatio: 4 / 5,
+                    child: HomePhotoButton(
+                      photo: 'assets/images/IMG_1661.jpg',
+                      text: 'VASCONCELOS',
                     ),
                   ),
-                  Flexible(
-                    child: AspectRatio(
-                      aspectRatio: 4/5,
-                      child: HomePhotoButton(
-                        photo: 'assets/images/IMG_1781.jpg',
-                        text: 'WILDLIFE',
-                      ),
+                ),
+                Flexible(
+                  child: AspectRatio(
+                    aspectRatio: 4 / 5,
+                    child: HomePhotoButton(
+                      photo: 'assets/images/IMG_1781.jpg',
+                      text: 'WILDLIFE',
                     ),
                   ),
-                  Flexible(
-                    child: AspectRatio(
-                      aspectRatio: 4/5,
-                      child: HomePhotoButton(
-                        photo: 'assets/images/IMG_0775.jpg',
-                        text: 'VERACRUZ',
-                      ),
+                ),
+                Flexible(
+                  child: AspectRatio(
+                    aspectRatio: 4 / 5,
+                    child: HomePhotoButton(
+                      photo: 'assets/images/IMG_0775.jpg',
+                      text: 'VERACRUZ',
                     ),
                   ),
-                ],
+                ),
+              ],
             ),
             Spacer(),
             ClipRRect(
@@ -119,14 +119,48 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: FractionallySizedBox(
-        heightFactor: 0.1,
+      bottomNavigationBar: SizedBox(
+        height: 100,
         child: ClipRRect(
           borderRadius: BorderRadiusGeometry.only(
             topLeft: Radius.circular(25),
             topRight: Radius.circular(25),
           ),
-          child: Container(color: Theme.of(context).primaryColor),
+          child: Container(
+            color: Theme.of(context).primaryColor,
+            child: Padding(
+              padding: EdgeInsetsGeometry.symmetric(horizontal: 40),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SvgPicture.asset(
+                    'assets/icons/layout-grid.svg',
+                    width: 50,
+                    colorFilter: ColorFilter.mode(
+                      Color(0xFF316163),
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  SvgPicture.asset(
+                    'assets/icons/home.svg',
+                    width: 50,
+                    colorFilter: ColorFilter.mode(
+                      Color(0xFF316163),
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  SvgPicture.asset(
+                    'assets/icons/user.svg',
+                    width: 50,
+                    colorFilter: ColorFilter.mode(
+                      Color(0xFF316163),
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
