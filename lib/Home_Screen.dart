@@ -57,34 +57,44 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            HomePhotoButton(
-              photo: 'assets/images/IMG_0701.jpg',
-              width: MediaQuery.of(context).size.width * 0.85,
-              height: MediaQuery.of(context).size.width * 0.85,
-              text: 'VIEW ALL',
+            AspectRatio(
+              aspectRatio: 1,
+              child: HomePhotoButton(
+                photo: 'assets/images/IMG_0701.jpg',
+                text: 'VIEW ALL',
+              ),
             ),
             Padding(
               padding: EdgeInsetsGeometry.symmetric(vertical: 20),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                spacing: 10,
                 children: [
-                  HomePhotoButton(
-                    photo: 'assets/images/IMG_1661.jpg',
-                    width: 100,
-                    height: 150,
-                    text: 'VASCONCELOS',
+                  Flexible(
+                    child: AspectRatio(
+                      aspectRatio: 4/5,
+                      child: HomePhotoButton(
+                        photo: 'assets/images/IMG_1661.jpg',
+                        text: 'VASCONCELOS',
+                      ),
+                    ),
                   ),
-                  HomePhotoButton(
-                    photo: 'assets/images/IMG_1781.jpg',
-                    width: 100,
-                    height: 150,
-                    text: 'WILDLIFE',
+                  Flexible(
+                    child: AspectRatio(
+                      aspectRatio: 4/5,
+                      child: HomePhotoButton(
+                        photo: 'assets/images/IMG_1781.jpg',
+                        text: 'WILDLIFE',
+                      ),
+                    ),
                   ),
-                  HomePhotoButton(
-                    photo: 'assets/images/IMG_0775.jpg',
-                    width: 100,
-                    height: 150,
-                    text: 'VERACRUZ',
+                  Flexible(
+                    child: AspectRatio(
+                      aspectRatio: 4/5,
+                      child: HomePhotoButton(
+                        photo: 'assets/images/IMG_0775.jpg',
+                        text: 'VERACRUZ',
+                      ),
+                    ),
                   ),
                 ],
               ),
