@@ -28,8 +28,8 @@ class HomePhotoButton extends StatelessWidget {
                     end: Alignment.bottomCenter,
                     colors: [
                       Colors.transparent,
-                      Color(0x8060C2C6),
-                      Color(0xFF60C2C6),
+                      Theme.of(context).primaryColor.withAlpha(128),
+                      Theme.of(context).primaryColor,
                     ],
                     stops: [0.0, 0.75, 1],
                   ),

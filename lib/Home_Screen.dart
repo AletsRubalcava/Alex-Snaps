@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
                 SvgPicture.asset(
                   Assets.icons.Alex_Snaps_Logo,
                   colorFilter: ColorFilter.mode(
-                    Color(0xFF60C2C6),
+                    Theme.of(context).primaryColor,
                     BlendMode.srcIn,
                   ),
                   height: 35,
@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                   Strings.App_Name,
                   style: GoogleFonts.leagueGothic(
                     fontSize: 30,
-                    color: Color(0xFF60C2C6),
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ],
@@ -64,9 +64,8 @@ class HomeScreen extends StatelessWidget {
                 text: 'VIEW ALL',
               ),
             ),
-            Padding(
-              padding: EdgeInsetsGeometry.symmetric(vertical: 20),
-              child: Row(
+            Spacer(),
+            Row(
                 spacing: 10,
                 children: [
                   Flexible(
@@ -97,8 +96,8 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
             ),
+            Spacer(),
             ClipRRect(
               borderRadius: BorderRadiusGeometry.circular(20),
               child: Container(
@@ -116,6 +115,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
+            Spacer(),
           ],
         ),
       ),
@@ -126,7 +126,7 @@ class HomeScreen extends StatelessWidget {
             topLeft: Radius.circular(25),
             topRight: Radius.circular(25),
           ),
-          child: Container(color: Color(0xFF60C2C6)),
+          child: Container(color: Theme.of(context).primaryColor),
         ),
       ),
     );
