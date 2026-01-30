@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'Assets.dart';
 
 class HomePhotoButton extends StatelessWidget {
   const HomePhotoButton({required this.photo, required this.text, super.key});

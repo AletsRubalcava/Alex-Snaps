@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'Strings.dart';
-import 'Assets.dart';
+import 'strings.dart';
+import 'assets.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({required this.photo, super.key});
@@ -37,7 +36,7 @@ class LandingPage extends StatelessWidget {
               right: 25,
               bottom: 130,
               child: Text(
-                Strings.Landing_page_quote,
+                Strings.landingPageQuote,
                 style: GoogleFonts.leagueGothic(
                   fontSize: 48,
                   color: Colors.white,
@@ -49,7 +48,7 @@ class LandingPage extends StatelessWidget {
               left: 0,
               right: 0,
               child: SvgPicture.asset(
-                Assets.icons.arrow_down_circle,
+                Assets.icons.arrowDownCircle,
                 width: 40,
                 height: 40,
                 colorFilter: ColorFilter.mode(Color(0xFF60C2C6), BlendMode.srcIn),

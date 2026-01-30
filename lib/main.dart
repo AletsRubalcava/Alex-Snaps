@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'Scroll_Vertical.dart';
+import 'scroll_vertical.dart';
 import 'package:flutter/services.dart';
 
 void main() async{

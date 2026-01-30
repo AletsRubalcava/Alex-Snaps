@@ -1,8 +1,7 @@
-import 'package:alex_snaps/Landing_Page.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:alex_snaps/landing_page.dart';
 import 'package:flutter/material.dart';
-import 'package:alex_snaps/Home_Screen.dart';
-import 'Assets.dart';
+import 'package:alex_snaps/home_screen.dart';
+import 'assets.dart';
 
 class ScrollVertical extends StatelessWidget{
   ScrollVertical({super.key});
@@ -18,8 +17,8 @@ class ScrollVertical extends StatelessWidget{
       ),
     );
   }
-  List<Widget> pages = [
-    LandingPage(photo: Assets.images.Landing_page_image),
+  final List<Widget> pages = [
+    LandingPage(photo: Assets.images.landingPageImage),
     HomeScreen()
   ];
 }
