@@ -1,8 +1,10 @@
 import 'package:alex_snaps/home_photo_button.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:alex_snaps/assets.dart';
+import 'package:alex_snaps/strings.dart';
 
-class MainHomeButton extends StatelessWidget{
-  const MainHomeButton({required this.mainButtonAspectRatio,super.key});
+class MainHomeButton extends StatelessWidget {
+  const MainHomeButton({required this.mainButtonAspectRatio, super.key});
 
   final double mainButtonAspectRatio;
 
@@ -11,8 +13,8 @@ class MainHomeButton extends StatelessWidget{
     return AspectRatio(
       aspectRatio: mainButtonAspectRatio,
       child: HomePhotoButton(
-        photo: 'assets/images/IMG_0701.jpg',
-        text: 'VIEW ALL',
+        photo: Assets.images.mainHomeButton,
+        text: Strings.mainHomeButton,
       ),
     );
   }

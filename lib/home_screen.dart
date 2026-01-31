@@ -6,6 +6,7 @@ import 'home_screen/home_row_buttons.dart';
 import 'home_screen/about_me_button.dart';
 import 'home_screen/main_home_button.dart';
 import 'bottom_navigation_bar.dart';
+import 'assets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,8 +15,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>{
-
+class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
@@ -30,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen>{
 
   @override
   Widget build(BuildContext context) {
-
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
@@ -62,7 +61,9 @@ class _HomeScreenState extends State<HomeScreen>{
               HomeTitle(width: width, height: height),
               MainHomeButton(mainButtonAspectRatio: mainButtonAspectRatio),
               Spacer(),
-              HomeRowButtons(secondaryButtonAspectRatio: secondaryButtonAspectRatio),
+              HomeRowButtons(
+                secondaryButtonAspectRatio: secondaryButtonAspectRatio,
+              ),
               Spacer(),
               AboutMeButton(width: width, height: height),
               Spacer(),
@@ -70,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen>{
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavBar(height: height, iconSize: iconSize)
+      bottomNavigationBar: BottomNavBar(height: height, iconSize: iconSize),
     );
   }
 }

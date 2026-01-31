@@ -13,7 +13,12 @@ class HomePhotoButton extends StatelessWidget {
       borderRadius: BorderRadiusGeometry.circular(20),
       child: Stack(
         children: [
-          Positioned.fill(child: Image.asset(photo, fit: BoxFit.cover)),
+          Positioned.fill(
+            child: Image.asset(photo, fit: BoxFit.cover,
+            cacheWidth: 1100,
+            cacheHeight: 1425,
+            ),
+          ),
           Align(
             alignment: Alignment.bottomCenter,
             child: FractionallySizedBox(

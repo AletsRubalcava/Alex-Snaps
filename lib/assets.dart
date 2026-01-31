@@ -11,4 +11,8 @@ class AppIcons{
 
 class AppImages{
   final String landingPageImage = 'assets/images/IMG_0790.jpg';
+  final String mainHomeButton = 'assets/images/thumbs/thumb_IMG_0701.jpg';
+  final String leftRowHomeButton = 'assets/images/thumbs/thumb_IMG_1661.jpg';
+  final String middleRowHomeButton = 'assets/images/thumbs/thumb_IMG_1781.jpg';
+  final String rightRowHomeButton = 'assets/images/thumbs/thumb_IMG_0775.jpg';
 }

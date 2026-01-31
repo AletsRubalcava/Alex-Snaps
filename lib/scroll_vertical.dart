@@ -1,7 +1,6 @@
 import 'package:alex_snaps/landing_page.dart';
 import 'package:flutter/material.dart';
 import 'package:alex_snaps/home_screen.dart';
-import 'assets.dart';
 
 class ScrollVertical extends StatelessWidget{
   ScrollVertical({super.key});
@@ -18,7 +17,7 @@ class ScrollVertical extends StatelessWidget{
     );
   }
   final List<Widget> pages = [
-    LandingPage(photo: Assets.images.landingPageImage),
+    LandingPage(),
     HomeScreen()
   ];
 }
