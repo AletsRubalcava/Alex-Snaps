@@ -5,10 +5,15 @@ import 'package:alex_snaps/about_me/about_me_page.dart';
 import 'package:alex_snaps/gallery/gallery_page.dart';
 
 class HorizontalScroll extends StatefulWidget {
-  const HorizontalScroll({required this.onPageChanged, super.key});
+  const HorizontalScroll({
+    required this.onPageChanged,
+    required this.currentPage,
+    super.key,
+  });
 
   //Saves the void function received as argument
   final ValueChanged<int> onPageChanged;
+  final int currentPage;
 
   @override
   State<HorizontalScroll> createState() => _HorizontalScroll();
@@ -30,7 +35,7 @@ class _HorizontalScroll extends State<HorizontalScroll> {
         onPageChanged: widget.onPageChanged,
         children: const [GalleryPage(), HomeScreen(), AboutMePage()],
       ),
-      bottomNavigationBar: BottomNavBar(),
+      bottomNavigationBar: BottomNavBar(currentPage: widget.currentPage),
     );
   }
 }

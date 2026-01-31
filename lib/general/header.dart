@@ -15,7 +15,7 @@ class Header extends StatelessWidget{
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SvgPicture.asset(
-          Assets.icons.alexSnapsLogo,
+        Assets.icons.alexSnapsLogo,
           colorFilter: ColorFilter.mode(
             Theme.of(context).primaryColor,
             BlendMode.srcIn,

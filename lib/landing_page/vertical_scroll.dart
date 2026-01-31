@@ -12,6 +12,7 @@ class ScrollVertical extends StatefulWidget {
 class _ScrollVertical extends State<ScrollVertical> {
   final PageController _controller = PageController();
   bool allowedVerticalScroll = true;
+  int currentPage = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +32,12 @@ class _ScrollVertical extends State<ScrollVertical> {
             //Builds again the widget
             setState(() {
               //if (index == 1) -> true : false
+              //currentPage = index of the page active
               allowedVerticalScroll = index == 1;
+              currentPage = index;
             });
           },
+          currentPage: currentPage,
         ),
       ],
     );
