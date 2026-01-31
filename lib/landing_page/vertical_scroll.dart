@@ -2,22 +2,19 @@ import 'landing_page.dart';
 import 'package:flutter/material.dart';
 import 'package:alex_snaps/home_screen/home_screen.dart';
 
-class ScrollVertical extends StatelessWidget{
+class ScrollVertical extends StatelessWidget {
   ScrollVertical({super.key});
+
   final PageController _controller = PageController(initialPage: 0);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView(
-        controller: _controller,
-        scrollDirection: Axis.vertical,
-        children: pages,
-      ),
+    return PageView(
+      scrollDirection: Axis.vertical,
+      children: [
+        LandingPage(),
+        HomeScreen()
+      ],
     );
   }
-  final List<Widget> pages = [
-    LandingPage(),
-    HomeScreen()
-  ];
 }
