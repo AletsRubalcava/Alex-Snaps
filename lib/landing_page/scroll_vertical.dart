@@ -1,6 +1,6 @@
-import 'package:alex_snaps/landing_page.dart';
+import 'landing_page.dart';
 import 'package:flutter/material.dart';
-import 'package:alex_snaps/home_screen.dart';
+import 'package:alex_snaps/home_screen/home_screen.dart';
 
 class ScrollVertical extends StatelessWidget{
   ScrollVertical({super.key});

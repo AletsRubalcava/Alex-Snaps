@@ -1,5 +1,5 @@
-import 'package:alex_snaps/assets.dart';
-import 'package:alex_snaps/strings.dart';
+import 'package:alex_snaps/app_content/assets.dart';
+import 'package:alex_snaps/app_content/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';

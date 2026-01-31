@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'header.dart';
-import 'home_screen/home_title.dart';
-import 'home_screen/home_row_buttons.dart';
-import 'home_screen/about_me_button.dart';
-import 'home_screen/main_home_button.dart';
-import 'bottom_navigation_bar.dart';
-import 'assets.dart';
+import 'package:alex_snaps/general/header.dart';
+import 'home_title.dart';
+import 'home_row_buttons.dart';
+import 'about_me_button.dart';
+import 'main_home_button.dart';
+import 'package:alex_snaps/general/bottom_navigation_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

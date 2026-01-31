@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'scroll_vertical.dart';
+import 'landing_page/scroll_vertical.dart';
 import 'package:flutter/services.dart';
 
 void main() async{

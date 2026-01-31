@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'strings.dart';
-import 'assets.dart';
+import 'package:alex_snaps/app_content/strings.dart';
+import 'package:alex_snaps/app_content/assets.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});

@@ -1,7 +1,7 @@
-import 'package:alex_snaps/home_photo_button.dart';
+import 'home_photo_button.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:alex_snaps/assets.dart';
-import 'package:alex_snaps/strings.dart';
+import 'package:alex_snaps/app_content/assets.dart';
+import 'package:alex_snaps/app_content/strings.dart';
 
 class MainHomeButton extends StatelessWidget {
   const MainHomeButton({required this.mainButtonAspectRatio, super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'assets.dart';
+import 'package:alex_snaps/app_content/assets.dart';
 
 class BottomNavBar extends StatelessWidget{
   const BottomNavBar({required this.height, required this.iconSize, super.key});
