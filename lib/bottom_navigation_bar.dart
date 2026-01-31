@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'assets.dart';
 
 class BottomNavBar extends StatelessWidget{
   const BottomNavBar({required this.height, required this.iconSize, super.key});
@@ -24,7 +25,7 @@ class BottomNavBar extends StatelessWidget{
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SvgPicture.asset(
-                  'assets/icons/layout-grid.svg',
+                  Assets.icons.layoutGrid,
                   width: iconSize,
                   colorFilter: ColorFilter.mode(
                     Color(0xFF316163),
@@ -32,7 +33,7 @@ class BottomNavBar extends StatelessWidget{
                   ),
                 ),
                 SvgPicture.asset(
-                  'assets/icons/home.svg',
+                  Assets.icons.homeBold,
                   width: iconSize,
                   colorFilter: ColorFilter.mode(
                     Color(0xFF316163),
@@ -40,7 +41,7 @@ class BottomNavBar extends StatelessWidget{
                   ),
                 ),
                 SvgPicture.asset(
-                  'assets/icons/user.svg',
+                  Assets.icons.user,
                   width: iconSize,
                   colorFilter: ColorFilter.mode(
                     Color(0xFF316163),
