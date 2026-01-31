@@ -3,13 +3,15 @@ import 'package:flutter_svg/svg.dart';
 import 'package:alex_snaps/app_content/assets.dart';
 
 class BottomNavBar extends StatelessWidget{
-  const BottomNavBar({required this.height, required this.iconSize, super.key});
-
-  final double height;
-  final double iconSize;
+  const BottomNavBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    final iconSize = width * 0.12;
+
     return SizedBox(
       height: height * 0.10,
       child: ClipRRect(
