@@ -1,4 +1,4 @@
-import 'home_photo_button.dart';
+import 'package:alex_snaps/widgets/buttons/gradient_photo_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:alex_snaps/app_content/assets.dart';
 import 'package:alex_snaps/app_content/strings.dart';
@@ -16,7 +16,7 @@ class HomeRowButtons extends StatelessWidget {
         Flexible(
           child: AspectRatio(
             aspectRatio: secondaryButtonAspectRatio,
-            child: HomePhotoButton(
+            child: GradientPhotoButton(
               photo: Assets.images.leftRowHomeButton,
               text: Strings.leftHomeRowButton,
             ),
@@ -25,7 +25,7 @@ class HomeRowButtons extends StatelessWidget {
         Flexible(
           child: AspectRatio(
             aspectRatio: secondaryButtonAspectRatio,
-            child: HomePhotoButton(
+            child: GradientPhotoButton(
               photo: Assets.images.middleRowHomeButton,
               text: Strings.middleHomeRowButton,
             ),
@@ -34,7 +34,7 @@ class HomeRowButtons extends StatelessWidget {
         Flexible(
           child: AspectRatio(
             aspectRatio: secondaryButtonAspectRatio,
-            child: HomePhotoButton(
+            child: GradientPhotoButton(
               photo: Assets.images.rightRowHomeButton,
               text: Strings.rightHomeRowButton,
             ),

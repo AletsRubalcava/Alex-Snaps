@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomePhotoButton extends StatelessWidget {
-  const HomePhotoButton({required this.photo, required this.text, super.key});
+class GradientPhotoButton extends StatelessWidget {
+  const GradientPhotoButton({required this.photo, required this.text, super.key});
 
   final String photo;
   final String text;

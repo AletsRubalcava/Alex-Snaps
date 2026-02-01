@@ -31,4 +31,9 @@ class AppImages{
   final String leftRowHomeButton = 'assets/images/dummy.jpg';
   final String middleRowHomeButton = 'assets/images/dummy.jpg';
   final String rightRowHomeButton = 'assets/images/dummy.jpg';
+  final String mainGalleryButton = 'assets/images/dummy.jpg';
+  final String galleryColumnOneLeftButton = 'assets/images/dummy.jpg';
+  final String galleryColumnOneRightButton = 'assets/images/dummy.jpg';
+  final String galleryColumnTwoLeftButton = 'assets/images/dummy.jpg';
+  final String galleryColumnTwoRightButton = 'assets/images/dummy.jpg';
 }

@@ -1,24 +1,20 @@
-import 'package:alex_snaps/home_screen/about_me_button.dart';
-import 'package:alex_snaps/home_screen/home_row_buttons.dart';
 import 'package:alex_snaps/general/title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:alex_snaps/app_content/strings.dart';
 import 'filter_search_button.dart';
+import 'package:alex_snaps/widgets/buttons/full_colored_photo_button.dart';
+import 'row_gallery_buttons.dart';
+import 'package:alex_snaps/app_content/assets.dart';
 
 class GalleryPage extends StatelessWidget {
   const GalleryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
-    double secondaryButtonAspectRatio = 5 / 8;
-
-    if (height < 700) {
-      secondaryButtonAspectRatio = 4 / 5;
-    }
+    final double spacing = 15;
 
     return Scaffold(
       backgroundColor: Color(0xFF2D2D2D),
@@ -30,16 +26,37 @@ class GalleryPage extends StatelessWidget {
             right: width * 0.08,
           ),
           child: Column(
+            spacing: spacing,
             children: [
-              TitleText(text: Strings.galleryPageTitle, width: width, height: height),
-              FilterSearchButton(width: width, text: 'FILTER SEARCH'),
-              Spacer(),
-              HomeRowButtons(
-                secondaryButtonAspectRatio: secondaryButtonAspectRatio,
+              TitleText(
+                text: Strings.galleryPageTitle,
+                width: width,
+                height: height,
               ),
-              Spacer(),
-              AboutMeButton(width: width, height: height),
-              Spacer(),
+              FilterSearchButton(width: width, text: Strings.filterSearch),
+              FullColoredPhotoButton(
+                text: Strings.mainGalleryButton,
+                width: width,
+                height: height,
+              ),
+              RowGalleryButtons(
+                leftText: Strings.galleryColumnOneLeftButton,
+                rightText: Strings.galleryColumnOneRightButton,
+                leftImage: Assets.images.galleryColumnOneLeftButton,
+                rightImage: Assets.images.galleryColumnOneRightButton,
+                width: width,
+                height: height,
+                spacing: spacing,
+              ),
+              RowGalleryButtons(
+                leftText: Strings.galleryColumnTwoLeftButton,
+                rightText: Strings.galleryColumnTwoRightButton,
+                leftImage: Assets.images.galleryColumnTwoLeftButton,
+                rightImage: Assets.images.galleryColumnTwoRightButton,
+                width: width,
+                height: height,
+                spacing: spacing,
+              ),
             ],
           ),
         ),
