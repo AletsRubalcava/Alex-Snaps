@@ -7,17 +7,14 @@ class RowGalleryButtons extends StatelessWidget {
     required this.rightText,
     required this.leftImage,
     required this.rightImage,
-    required this.width,
-    required this.height,
     required this.spacing,
+    super.key
   });
 
   final String leftText;
   final String rightText;
   final String leftImage;
   final String rightImage;
-  final double width;
-  final double height;
   final double spacing;
 
   @override

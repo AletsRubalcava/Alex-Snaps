@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           child: Column(
             children: [
-              TitleText(text: Strings.homePageTitle,width: width, height: height),
+              TitleText(text: Strings.homePageTitle),
               MainHomeButton(mainButtonAspectRatio: mainButtonAspectRatio),
               Spacer(),
               HomeRowButtons(

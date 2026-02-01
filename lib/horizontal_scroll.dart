@@ -3,7 +3,7 @@ import 'package:alex_snaps/general/header.dart';
 import 'package:alex_snaps/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:alex_snaps/about_me/about_me_page.dart';
-import 'package:alex_snaps/gallery/gallery_page.dart';
+import 'gallery/main_gallery_page_list_view.dart';
 
 class HorizontalScroll extends StatefulWidget {
   const HorizontalScroll({
@@ -35,7 +35,7 @@ class _HorizontalScroll extends State<HorizontalScroll> {
         //this function does not return anything, but changes the
         // allowedVerticalScroll variable y the parent
         onPageChanged: widget.onPageChanged,
-        children: const [GalleryPage(), HomeScreen(), AboutMePage()],
+        children: const [MainGalleryPageListView(), HomeScreen(), AboutMePage()],
       ),
       bottomNavigationBar: BottomNavBar(currentPage: widget.currentPage),
     );

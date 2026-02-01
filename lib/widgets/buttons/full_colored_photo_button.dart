@@ -6,17 +6,15 @@ import 'package:google_fonts/google_fonts.dart';
 class FullColoredPhotoButton extends StatelessWidget {
   const FullColoredPhotoButton({
     required this.text,
-    required this.width,
-    required this.height,
     super.key,
   });
 
   final String text;
-  final double width;
-  final double height;
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return ClipRRect(
       borderRadius: BorderRadiusGeometry.circular(20),
       child: AspectRatio(

@@ -3,16 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 class FilterSearchButton extends StatelessWidget {
   const FilterSearchButton({
-    required this.width,
     required this.text,
     super.key,
   });
 
-  final double width;
   final String text;
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return ClipRRect(
       borderRadius: BorderRadiusGeometry.circular(10),
       child: AspectRatio(
