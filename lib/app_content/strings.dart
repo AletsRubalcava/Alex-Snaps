@@ -6,4 +6,6 @@ class Strings{
   static const String leftHomeRowButton = 'VASCONCELOS';
   static const String middleHomeRowButton = 'WILDLIFE';
   static const String rightHomeRowButton = 'VERACRUZ';
+  static const String homePageTitle = 'HOME';
+  static const String galleryPageTitle = 'GALLERY';
 }

@@ -1,10 +1,10 @@
-import 'package:alex_snaps/general/header.dart';
 import 'package:alex_snaps/home_screen/about_me_button.dart';
 import 'package:alex_snaps/home_screen/home_row_buttons.dart';
-import 'package:alex_snaps/home_screen/home_title.dart';
+import 'package:alex_snaps/general/title_text.dart';
 import 'package:alex_snaps/home_screen/main_home_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:alex_snaps/app_content/strings.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -51,8 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           child: Column(
             children: [
-              Header(width: width),
-              HomeTitle(width: width, height: height),
+              TitleText(text: Strings.homePageTitle,width: width, height: height),
               MainHomeButton(mainButtonAspectRatio: mainButtonAspectRatio),
               Spacer(),
               HomeRowButtons(

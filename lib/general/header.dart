@@ -4,32 +4,45 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Header extends StatelessWidget{
-  const Header({required this.width, super.key});
-
-  final double width;
+class Header extends StatelessWidget implements PreferredSizeWidget {
+  const Header({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        SvgPicture.asset(
-        Assets.icons.alexSnapsLogo,
-          colorFilter: ColorFilter.mode(
-            Theme.of(context).primaryColor,
-            BlendMode.srcIn,
-          ),
-          width: width * 0.15,
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.only(
+          top: height * 0.01,
+          left: width * 0.08,
+          right: width * 0.08,
         ),
-        Text(
-          Strings.appName,
-          style: GoogleFonts.leagueGothic(
-            fontSize: width * 0.07,
-            color: Theme.of(context).primaryColor,
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SvgPicture.asset(
+              Assets.icons.alexSnapsLogo,
+              colorFilter: ColorFilter.mode(
+                Theme.of(context).primaryColor,
+                BlendMode.srcIn,
+              ),
+              width: width * 0.15,
+            ),
+            Text(
+              Strings.appName,
+              style: GoogleFonts.leagueGothic(
+                fontSize: width * 0.07,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
+
+  @override
+  // TODO: implement preferredSize
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

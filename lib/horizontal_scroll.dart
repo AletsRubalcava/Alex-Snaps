@@ -1,4 +1,5 @@
 import 'package:alex_snaps/general/bottom_navigation_bar.dart';
+import 'package:alex_snaps/general/header.dart';
 import 'package:alex_snaps/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:alex_snaps/about_me/about_me_page.dart';
@@ -26,6 +27,7 @@ class _HorizontalScroll extends State<HorizontalScroll> {
 
     return Scaffold(
       backgroundColor: Color(0xFF2D2D2D),
+      appBar: Header(),
       body: PageView(
         controller: controller,
         scrollDirection: Axis.horizontal,

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomeTitle extends StatelessWidget{
-  const HomeTitle({required this.width, required this.height, super.key});
+class TitleText extends StatelessWidget{
+  const TitleText({required this.text, required this.width, required this.height, super.key});
 
   final double width;
   final double height;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class HomeTitle extends StatelessWidget{
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
-          'HOME',
+          text,
           style: GoogleFonts.leagueGothic(
             color: Colors.white,
             fontSize: width * 0.10,
