@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'landing_page/vertical_scroll.dart';
 import 'package:flutter/services.dart';
+import 'package:alex_snaps/gallery/gallery_photo_page.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF60C2C6)
       ),
       home: ScrollVertical()
+      //home: GalleryPhotoPage()
     );
   }
 }

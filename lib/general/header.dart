@@ -15,6 +15,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
       child: Padding(
         padding: EdgeInsets.only(
           top: height * 0.01,
+          bottom: height * 0.01,
           left: width * 0.08,
           right: width * 0.08,
         ),
