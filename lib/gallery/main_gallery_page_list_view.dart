@@ -70,7 +70,6 @@ class MainGalleryPageListView extends StatelessWidget {
           // SizedBox of height spacing (variable)
           separatorBuilder: (_,_) => SizedBox(height: spacing),
           padding: EdgeInsets.only(
-            top: height * 0.01,
             bottom: height * 0.02,
             left: width * 0.08,
             right: width * 0.08,
