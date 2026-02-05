@@ -4,7 +4,7 @@ class Photo{
   final String id;
   final String name;
   final String route;
-  var categories = [];
+  final List<String> categories = [];
 
   factory Photo.createID(String arg){
     final id = DateTime.now().millisecondsSinceEpoch.toString();

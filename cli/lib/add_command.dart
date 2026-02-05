@@ -10,12 +10,13 @@ class AddCommand extends Command {
 
   @override
   void run() {
-    findFile();
+    final results = argResults!.rest;
+
+    findFile(results);
 
   }
 
-  void findFile(){
-    final results = argResults!.rest;
+  void findFile(final results){
 
     if(results.isEmpty){
       print('File not provided.');
@@ -43,9 +44,5 @@ class AddCommand extends Command {
     }
     print('Not found!');
     exit(1);
-  }
-
-  void findCategory(){
-
   }
 }
