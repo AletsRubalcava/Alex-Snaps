@@ -13,4 +13,13 @@ class Photo{
 
     return Photo(id: id,name: name ,route: route);
   }
+
+  Map<String, dynamic> toJson(){
+    return{
+      'id': id,
+      'name': name,
+      'route': route,
+      'categories': categories
+    };
+  }
 }

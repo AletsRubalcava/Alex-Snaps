@@ -1,48 +1,82 @@
 import 'dart:io';
 import 'package:args/command_runner.dart';
+import 'package:cli/database.dart';
+import 'package:cli/photo_class.dart';
 
 class AddCommand extends Command {
   @override
   final name = 'add';
 
   @override
-  final description = 'Add photos to the app';
+  final description =
+      'Add photos to the app. Introduce file name to add a single file, or "." to add every file on the directory.';
+
+  Database database;
+
+  AddCommand(this.database);
 
   @override
   void run() {
     final results = argResults!.rest;
 
-    findFile(results);
-
-  }
-
-  void findFile(final results){
-
-    if(results.isEmpty){
-      print('File not provided.');
-      exit(2);
-    }
-
-    final dir = Directory('${Directory.current.path}/../app/assets/images');
-
-    if(!dir.existsSync()){
-      print('Directory: "app/assets/images" does not exist.');
+    if (results.isEmpty) {
+      print('Value not introduced.');
+      printUsage();
       exit(1);
     }
 
-    final imageFiles = dir.listSync().whereType<File>();
+    if (results.length > 1) {
+      print('This command only accepts one parameter.');
+      printUsage();
+      exit(1);
+    }
 
-    File? found;
+    final fileName = results[0];
 
-    for(final file in imageFiles){
-      final name = file.uri.pathSegments.last;
-      if(name == results[0]){
-        found = file;
-        print('Found!');
-        return;
+    final directories = [
+      'data/import',
+      'app/assets/images'
+    ];
+
+    //Looks for directories
+    for(final dir in directories){
+      bool found = findDirectory(dir);
+      if(!found){
+        print('Directory: "$dir" not found!');
+        exit(1);
       }
     }
-    print('Not found!');
-    exit(1);
+
+    //Looks for file
+    for(final dir in directories){
+      bool found = findFile(results[0],dir);
+      if(found){
+        print('File already exist in $dir.');
+        exit(1);
+      }
+    }
+
+    Photo photo = Photo.createID(fileName);
+    database.addPhoto(photo);
+  }
+
+  bool findDirectory(String path){
+    final dir = Directory('${Directory.current.path}/../$path');
+    if(dir.existsSync()) return true;
+    return false;
+  }
+
+  bool findFile(String results, String path) {
+    final dir = Directory('${Directory.current.path}/../$path');
+
+    final imageFiles = dir.listSync().whereType<File>();
+
+    for (final file in imageFiles) {
+      final name = file.uri.pathSegments.last;
+      if (name == results) {
+        return true;
+      }
+    }
+    return false;
   }
 }

@@ -12,7 +12,7 @@ void main(List<String> arguments) {
   Database database = Database();
   database.fillCategories();
 
-  runner.addCommand(AddCommand());
+  runner.addCommand(AddCommand(database));
   runner.addCommand(CategoryCommand(database));
   runner.run(arguments);
   database.writeDatabaseFile();

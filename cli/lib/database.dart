@@ -22,8 +22,14 @@ class Database {
     final categoryList = data['categories'] as List<dynamic>;
     final photoList = data['photos'] as List<dynamic>;
     //Turns every element of the list, and turns it into a string.
-    categories.addAll(categoryList.map((e) => e.toString()));
-    //photos.addAll(photoList.map((e) => e.toString()));
+    categories.addAll(categoryList.map((category) => category.toString()));
+    photos.addAll(photoList.map((photo){
+        final id = photo['id'] as String;
+        final name = photo['name'] as String;
+        final route = photo['route'] as String;
+        return Photo(id: id, route: route, name: name);
+        })
+    );
   }
 
   bool lookForCategory(String target) {
@@ -44,9 +50,10 @@ class Database {
   }
 
   void writeDatabaseFile(){
+
     final data = {
       'categories': categories,
-      'photos': photos
+      'photos': photos.map((photo) => photo.toJson()).toList()
     };
 
     //Converts data into json format with auto indentation
