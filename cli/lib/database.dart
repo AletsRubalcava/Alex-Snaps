@@ -3,10 +3,9 @@ import 'dart:convert';
 import 'package:cli/photo_class.dart';
 
 class Database {
-
   final file = File('${Directory.current.path}/../data/app_data.json');
   final List<String> categories = [];
-  final List<Photo> photos = [];
+  final Map<String, Photo> photos = {};
 
   void fillCategories() {
     //If file doesn't exist
@@ -20,15 +19,30 @@ class Database {
     final data = jsonDecode(content) as Map<String, dynamic>;
     //Extract map 'data' in 'categories and photos as a list of type dynamic
     final categoryList = data['categories'] as List<dynamic>;
-    final photoList = data['photos'] as List<dynamic>;
+    final photosJson = data['photos'] as Map<String, dynamic>;
     //Turns every element of the list, and turns it into a string.
     categories.addAll(categoryList.map((category) => category.toString()));
-    photos.addAll(photoList.map((photo){
-        final id = photo['id'] as String;
-        final name = photo['name'] as String;
-        final route = photo['route'] as String;
-        return Photo(id: id, route: route, name: name);
-        })
+    //Creates a map from a set of map entries
+    photos.addAll(
+      photosJson.map((id, photoData) {
+        final photoMap = photoData as Map<String, dynamic>;
+
+        final photoId = photoMap['id'] as String;
+        final name = photoMap['name'] as String;
+        final route = photoMap['route'] as String;
+        //To every element in categories, converts it into the expected type
+        final categories = (photoMap['categories'] as List<dynamic>)
+            .map((cat) => cat.toString())
+            .toList(); //Returns an iterable, converts it into a list
+
+        final photoObj = Photo(
+          id: photoId,
+          route: route,
+          name: name,
+          categories: categories,
+        );
+        return MapEntry(id, photoObj);
+      }),
     );
   }
 
@@ -41,19 +55,27 @@ class Database {
     categories.add(category);
   }
 
-  void removeCategory(String category){
+  void removeCategory(String category) {
     categories.remove(category);
   }
 
-  void addPhoto(Photo photo){
-    photos.add(photo);
+  String lookForPhotoByName(String name){
+    final photo = photos.values.where((p) => p.name == name).first;
+    return photo.id;
   }
 
-  void writeDatabaseFile(){
+  void addPhoto(Photo photo) {
+    photos[photo.id] = photo;
+  }
 
+  void removePhoto(String id){
+    photos.remove(id);
+  }
+
+  void writeDatabaseFile() {
     final data = {
       'categories': categories,
-      'photos': photos.map((photo) => photo.toJson()).toList()
+      'photos': photos.map((id, photo) => MapEntry(id, photo.toJson())),
     };
 
     //Converts data into json format with auto indentation
@@ -65,5 +87,13 @@ class Database {
 
   List<String> getCategories() {
     return categories;
+  }
+
+  void addCategoryToPhoto(String id, String category) {
+    photos[id]!.categories.add(category);
+  }
+
+  void removeCategoryToPhoto(String id, String category){
+    photos[id]!.categories.remove(category);
   }
 }

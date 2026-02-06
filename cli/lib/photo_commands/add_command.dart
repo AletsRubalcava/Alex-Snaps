@@ -25,12 +25,6 @@ class AddCommand extends Command {
       exit(1);
     }
 
-    if (results.length > 1) {
-      print('This command only accepts one parameter.');
-      printUsage();
-      exit(1);
-    }
-
     final fileName = results[0];
 
     final directories = [
@@ -58,6 +52,12 @@ class AddCommand extends Command {
 
     Photo photo = Photo.createID(fileName);
     database.addPhoto(photo);
+
+    if (results.length > 1) {
+      for(int i = 1; i < results.length; i++){
+        database.addCategoryToPhoto(photo.id, results[i]);
+      }
+    }
   }
 
   bool findDirectory(String path){

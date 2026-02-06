@@ -5,5 +5,15 @@
 		"Party",
 		"Valquirico"
 	],
-	"photos": []
+	"photos": {
+		"1770349865864": {
+			"id": "1770349865864",
+			"name": "IMG_0000.jpg",
+			"route": "assets/images/IMG_0000.jpg",
+			"categories": [
+				"Vasconcelos",
+				"Wildlife"
+			]
+		}
+	}
 }
