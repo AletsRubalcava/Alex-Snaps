@@ -7,7 +7,8 @@ class CategoryRemoveCommand extends Command {
   final name = 'remove';
 
   @override
-  final description = 'Removes a category from de database';
+  final description =
+      'Removes a category from de database. Accepts one or more inputs';
 
   final Database database;
 
@@ -18,24 +19,19 @@ class CategoryRemoveCommand extends Command {
     final results = argResults!.rest;
 
     if (results.isEmpty) {
-      print('Value not introduced.');
+      print('Value(s) not introduced.');
       printUsage();
       exit(1);
     }
 
-    if (results.length > 1) {
-      print('This command only accepts one parameter.');
-      printUsage();
-      exit(1);
+    for(String cat in results) {
+      bool found = database.lookForCategory(cat);
+      if (!found) {
+        print('Category: "$cat" does not exist.');
+        continue;
+      }
+      database.removeCategory(cat);
+      print('Category $cat removed!');
     }
-
-    bool found = database.lookForCategory(results[0]);
-
-    if (!found) {
-      print('This category does not exist.');
-      exit(1);
-    }
-    database.removeCategory(results[0]);
-    print('Category ${results[0]} removed!');
   }
 }

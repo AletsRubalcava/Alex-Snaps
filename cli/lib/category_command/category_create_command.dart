@@ -7,7 +7,7 @@ class CategoryCreateCommand extends Command {
   final name = 'create';
 
   @override
-  final description = 'Creates a new category';
+  final description = 'Creates a new category. Accepts one or more inputs.';
 
   final Database database;
 
@@ -18,24 +18,19 @@ class CategoryCreateCommand extends Command {
     final results = argResults!.rest;
 
     if (results.isEmpty) {
-      print('Value not introduced.');
+      print('Value(s) not introduced.');
       printUsage();
       exit(1);
     }
 
-    if (results.length > 1) {
-      print('This command only accepts one parameter.');
-      printUsage();
-      exit(1);
+    for(String cat in results){
+      bool found = database.lookForCategory(cat);
+      if (found) {
+        print('Category: "$cat" already exist.');
+        continue;
+      }
+      database.addCategory(cat);
+      print('Category $cat added!');
     }
-
-    bool found = database.lookForCategory(results[0]);
-
-    if (found) {
-      print('This category already exist.');
-      exit(1);
-    }
-    database.addCategory(results[0]);
-    print('Category ${results[0]} added!');
   }
 }

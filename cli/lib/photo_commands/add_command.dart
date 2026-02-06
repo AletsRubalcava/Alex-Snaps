@@ -9,7 +9,8 @@ class AddCommand extends Command {
 
   @override
   final description =
-      'Add photos to the app. Introduce file name to add a single file, or "." to add every file on the directory.';
+      'Add photos to the app. '
+      'Introduce file name to add a single file, or "." to add every file on the directory.';
 
   Database database;
 

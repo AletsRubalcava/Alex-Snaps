@@ -15,6 +15,13 @@ class CategoryListCommand extends Command {
 
   @override
   void run() {
+    final results = argResults!.rest;
+
+    if(results.isNotEmpty){
+      print('This command does not accepts arguments');
+      exit(1);
+    }
+
     List<String> categories = database.getCategories();
 
     if (categories.isEmpty) {
