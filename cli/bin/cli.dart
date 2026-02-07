@@ -11,7 +11,7 @@ void main(List<String> arguments) {
   );
 
   Database database = Database();
-  database.fillCategories();
+  database.initialize();
 
   runner.addCommand(AddCommand(database));
   runner.addCommand(DeleteCommand(database));

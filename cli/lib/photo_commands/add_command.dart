@@ -21,27 +21,16 @@ class AddCommand extends Command {
     final results = argResults!.rest;
 
     if (results.isEmpty) {
-      print('Value not introduced.');
+      print('Value(s) not introduced.');
       printUsage();
       exit(1);
     }
 
     final fileName = results[0];
 
-    final directories = [
-      'data/import',
-      'app/assets/images'
-    ];
-
-    //Looks for directories
-    for(final dir in directories){
-      bool found = findDirectory(dir);
-      if(!found){
-        print('Directory: "$dir" not found!');
-        exit(1);
-      }
-    }
-
+    database.lookForEssentialDirectories();
+    return;
+    /*
     //Looks for file
     for(final dir in directories){
       bool found = findFile(results[0],dir);
@@ -61,12 +50,6 @@ class AddCommand extends Command {
     }
   }
 
-  bool findDirectory(String path){
-    final dir = Directory('${Directory.current.path}/../$path');
-    if(dir.existsSync()) return true;
-    return false;
-  }
-
   bool findFile(String results, String path) {
     final dir = Directory('${Directory.current.path}/../$path');
 
@@ -78,6 +61,6 @@ class AddCommand extends Command {
         return true;
       }
     }
-    return false;
+    return false;*/
   }
 }
