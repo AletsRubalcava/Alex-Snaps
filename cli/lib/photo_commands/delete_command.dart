@@ -26,34 +26,19 @@ class DeleteCommand extends Command {
 
     final fileName = results[0];
 
-    final dir = Directory('${Directory.current.path}/../app/assets/images');
-    if (!dir.existsSync()) {
-      print('$dir not found!');
-      exit(1);
+    String? id = database.lookForPhotoByName(fileName);
+
+    if(id == null){
+      print("File not found.");
+      return;
     }
-
-    /*final imageFiles = dir.listSync().whereType<File>();
-
-    for (final file in imageFiles) {
-      final name = file.uri.pathSegments.last;
-      if (name == fileName) {
-        String id = database.lookForPhotoByName(fileName);
-        database.removePhoto(id);
-      }
-    }
-    print('File does not exist!');*/
-
-    String id = database.lookForPhotoByName(fileName);
 
     if (results.length > 1) {
-      String id = database.lookForPhotoByName(fileName);
-
-      for (int i = 0; i < results.length; i++) {
+      for (int i = 1; i < results.length; i++) {
         database.removeCategoryToPhoto(id, results[i]);
       }
       return;
     }
-
     database.removePhoto(id);
   }
 }

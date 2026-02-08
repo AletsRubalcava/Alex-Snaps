@@ -5,32 +5,33 @@ import 'package:path/path.dart' as path;
 
 class Database {
   final projectRoot = path.dirname(Directory.current.path);
-  late final dataFile = File(path.join(projectRoot,'data','app_data.json'));
+  late final dataFile = File(path.join(projectRoot, 'data', 'app_data.json'));
   final List<String> categories = [];
   final Map<String, Photo> photos = {};
+  int maxOrder = 0;
 
-  void initialize(){
+  void initialize() {
     lookForEssentialDirectories();
     fillDatabase();
   }
 
-  void lookForEssentialDirectories(){
+  void lookForEssentialDirectories() {
     final directories = [
       'data/import',
       'app/assets/icons',
-      'app/assets/images/thumbs'
+      'app/assets/images/thumbs',
     ];
 
-    for(final dir in directories){
-      final directory = Directory(path.join(projectRoot,dir));
-      if(!directory.existsSync()){
+    for (final dir in directories) {
+      final directory = Directory(path.join(projectRoot, dir));
+      if (!directory.existsSync()) {
         _repairDirectory(dir);
       }
     }
   }
 
-  void _repairDirectory(String directory){
-    final dir = Directory(path.join(projectRoot,directory));
+  void _repairDirectory(String directory) {
+    final dir = Directory(path.join(projectRoot, directory));
     print('Creating missing directory: $directory');
     dir.createSync(recursive: true);
   }
@@ -58,7 +59,7 @@ class Database {
     }
 
     //If json is empty
-    if(content.trim().isEmpty){
+    if (content.trim().isEmpty) {
       writeDatabaseFile();
       return;
     }
@@ -77,6 +78,7 @@ class Database {
         final photoMap = photoData as Map<String, dynamic>;
 
         final photoId = photoMap['id'] as String;
+        final order = photoMap['order'] as int;
         final name = photoMap['name'] as String;
         final route = photoMap['route'] as String;
         //To every element in categories, converts it into the expected type
@@ -86,6 +88,7 @@ class Database {
 
         final photoObj = Photo(
           id: photoId,
+          order: order,
           route: route,
           name: name,
           categories: photoCategories,
@@ -93,6 +96,21 @@ class Database {
         return MapEntry(id, photoObj);
       }),
     );
+    final dataOrder = data['Max Order'] as int;
+    maxOrder = dataOrder;
+  }
+
+  File? lookForFile(String fileName, String dir) {
+    final directory = Directory(path.join(projectRoot, dir));
+    final imageFiles = directory.listSync().whereType<File>();
+
+    for (final file in imageFiles) {
+      final name = file.uri.pathSegments.last;
+      if (name == fileName) {
+        return file;
+      }
+    }
+    return null;
   }
 
   bool lookForCategory(String target) {
@@ -112,31 +130,74 @@ class Database {
     return categories;
   }
 
-  String lookForPhotoByName(String name){
-    final photo = photos.values.where((p) => p.name == name).first;
-    return photo.id;
+  String? lookForPhotoByName(String name) {
+    final photo = photos.values.where((p) => p.name == name).firstOrNull;
+    return (photo != null) ? photo.id : null;
   }
 
-  void addPhoto(Photo photo) {
+  void addPhoto(File file) {
+    final fileName = file.uri.pathSegments.last;
+
+    Photo photo = Photo.createID(fileName, maxOrder+1);
+
     photos[photo.id] = photo;
+    movePhoto(file.path,photo.route);
+    maxOrder++;
   }
 
-  void removePhoto(String id){
+  void movePhoto(String fileRoute, String destinyPath) {
+    final file = File(fileRoute);
+    final finalPath = path.isAbsolute(destinyPath)
+        ? destinyPath
+        : path.join(projectRoot, destinyPath);
+    try {
+      file.rename(finalPath);
+    } catch (_) {
+      file.copySync(finalPath);
+      file.deleteSync();
+    }
+  }
+
+  void removePhoto(String id) {
+    final photo = photos[id];
+    if (photo == null) return;
+
+    final File? file = lookForFile(photo.name, path.dirname(photo.route));
     photos.remove(id);
+
+    if(file == null) return;
+    file.deleteSync();
   }
 
   void addCategoryToPhoto(String id, String category) {
-    photos[id]!.categories.add(category);
+    final photo = photos[id];
+    if(photo == null) return;
+
+    if(lookForCategory(category)) {
+      if(!photo.categories.contains(category)) {
+        photo.categories.add(category);
+        return;
+      }
+      print('${photo.name} already is marked as $category');
+      return;
+    }
+    print('Category $category does no exist!');
   }
 
-  void removeCategoryToPhoto(String id, String category){
-    photos[id]!.categories.remove(category);
+  void removeCategoryToPhoto(String id, String category) {
+    if(lookForCategory(category)) {
+      photos[id]!.categories.remove(category);
+      print('Removed: "$category" category!');
+      return;
+    }
+    print('Category $category does no exist!');
   }
 
   void writeDatabaseFile() {
     final data = {
       'categories': categories,
       'photos': photos.map((id, photo) => MapEntry(id, photo.toJson())),
+      'Max Order': maxOrder,
     };
     //Converts data into json format with auto indentation
     final content = JsonEncoder.withIndent('\t').convert(data);

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:cli/database.dart';
-import 'package:cli/photo_class.dart';
+import 'package:path/path.dart' as path;
 
 class AddCommand extends Command {
   @override
@@ -26,41 +26,48 @@ class AddCommand extends Command {
       exit(1);
     }
 
-    final fileName = results[0];
+    final fileName = results.first;
+    final categories = results.skip(1).toList();
 
-    database.lookForEssentialDirectories();
-    return;
-    /*
-    //Looks for file
-    for(final dir in directories){
-      bool found = findFile(results[0],dir);
-      if(found){
-        print('File already exist in $dir.');
-        exit(1);
+    if(fileName == '.'){
+      print('Massive charge');
+      return;
+    }
+
+    final String? existingId = database.lookForPhotoByName(fileName);
+
+    if (existingId != null) {
+      if (categories.isNotEmpty) {
+        _addCategories(existingId, categories);
+        return;
       }
     }
 
-    Photo photo = Photo.createID(fileName);
-    database.addPhoto(photo);
+    final File? photoFile = database.lookForFile(
+        fileName, path.join('data', 'import'));
 
-    if (results.length > 1) {
-      for(int i = 1; i < results.length; i++){
-        database.addCategoryToPhoto(photo.id, results[i]);
-      }
+    if (photoFile == null) {
+      print('File not found in import directory.');
+      return;
+    }
+
+    if (database.lookForFile(fileName, path.join('app', 'assets', 'images')) !=
+        null) {
+      print('File already exist in assets/images');
+      return;
+    }
+
+    database.addPhoto(photoFile);
+
+    if (categories.isNotEmpty) {
+      final newId = database.lookForPhotoByName(fileName)!;
+      _addCategories(newId, categories);
     }
   }
 
-  bool findFile(String results, String path) {
-    final dir = Directory('${Directory.current.path}/../$path');
-
-    final imageFiles = dir.listSync().whereType<File>();
-
-    for (final file in imageFiles) {
-      final name = file.uri.pathSegments.last;
-      if (name == results) {
-        return true;
-      }
+  void _addCategories(String id, List<String> categories){
+    for(final cat in categories){
+      database.addCategoryToPhoto(id, cat);
     }
-    return false;*/
   }
 }
