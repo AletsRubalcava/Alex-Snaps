@@ -15,22 +15,21 @@ class CategoryRemoveCommand extends Command {
 
   @override
   void run() {
-    final results = argResults!.rest;
+    final categories = argResults!.rest;
 
-    if (results.isEmpty) {
+    if (categories.isEmpty) {
       print('Value(s) not introduced.');
       printUsage();
       return;
     }
 
-    for(String cat in results) {
-      bool found = database.lookForCategory(cat);
-      if (!found) {
-        print('Category: "$cat" does not exist.');
-        continue;
+    final List<String> newCategories = database.validateCategories(categories);
+
+    if(newCategories.isNotEmpty) {
+      for (String cat in newCategories) {
+        database.removeCategory(cat);
+        print('Category $cat removed!');
       }
-      database.removeCategory(cat);
-      print('Category $cat removed!');
     }
   }
 }

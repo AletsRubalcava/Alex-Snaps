@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:cli/database.dart';
 
@@ -22,7 +21,7 @@ class CategoryListCommand extends Command {
       return;
     }
 
-    List<String> categories = database.getCategories();
+    Set<String> categories = database.getCategories();
 
     if (categories.isEmpty) {
       print('No active categories.');

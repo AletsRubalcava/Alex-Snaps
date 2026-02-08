@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:cli/database.dart';
 
@@ -8,7 +7,7 @@ class DeleteCommand extends Command {
 
   @override
   final description =
-      'Delete photos from the app. Introduce file name to delete a single file, or "." to delete every file on the directory.';
+      'Delete photos from the app. Introduce file name to delete a single file.';
 
   Database database;
 
@@ -24,21 +23,25 @@ class DeleteCommand extends Command {
       return;
     }
 
-    final fileName = results[0];
+    final fileName = results.first;
 
     String? id = database.fileNameMap[fileName];
 
-    if(id == null){
+    if (id == null) {
       print("File not found.");
       return;
     }
 
     if (results.length > 1) {
-      for (int i = 1; i < results.length; i++) {
-        database.removeCategoryToPhoto(id, results[i]);
+      final categories = results.skip(1).toList();
+      final newCategories = database.validateCategories(categories);
+
+      for (final cat in newCategories) {
+        database.removeCategoryToPhoto(id, cat);
       }
       return;
     }
     database.removePhoto(id);
+    print('Photo deleted successfully!');
   }
 }

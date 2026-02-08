@@ -6,7 +6,7 @@ import 'package:path/path.dart' as path;
 class Database {
   final projectRoot = path.dirname(Directory.current.path);
   late final dataFile = File(path.join(projectRoot, 'data', 'app_data.json'));
-  final List<String> categories = [];
+  final Set<String> categories = {};
   final Map<String, Photo> photos = {};
   final Map<String, String> fileNameMap = {};
   int maxOrder = 0;
@@ -115,9 +115,21 @@ class Database {
     return null;
   }
 
-  bool lookForCategory(String target) {
-    //O(n). Could be O(1), but not necessary right now.
-    return categories.contains(target);
+  List<String> validateCategories(List<String> cats) {
+    final valid = <String>[];
+    final invalid = <String>[];
+
+    for (final cat in cats) {
+      if (categories.contains(cat)) {
+        valid.add(cat);
+      } else {
+        invalid.add(cat);
+      }
+    }
+    if (invalid.isNotEmpty) {
+      print('These categories does not exist: ${invalid.join(', ')}');
+    }
+    return valid;
   }
 
   void addCategory(String category) {
@@ -128,7 +140,7 @@ class Database {
     categories.remove(category);
   }
 
-  List<String> getCategories() {
+  Set<String> getCategories() {
     return categories;
   }
 
@@ -173,27 +185,30 @@ class Database {
     file.deleteSync();
   }
 
-  AddCategoryResult addCategoryToPhoto(String id, String category) {
+  void addCategoryToPhoto(String id, String category) {
     final photo = photos[id];
-    if (photo == null) return AddCategoryResult.photoNotFound;
-    if (!lookForCategory(category)) return AddCategoryResult.categoryNotFound;
-    if (photo.categories.contains(category)) return AddCategoryResult.categoryIsAlreadyPresentInPhoto;
-    photo.categories.add(category);
-    return AddCategoryResult.success;
+    if (photo == null) return;
+
+    if(!photo.categories.contains(category)) {
+      photo.categories.add(category);
+    }
   }
 
   void removeCategoryToPhoto(String id, String category) {
-    if (lookForCategory(category)) {
-      photos[id]!.categories.remove(category);
-      print('Removed: "$category" category!');
+    final photo = photos[id];
+    if(photo == null) return;
+
+    if(!photo.categories.contains(category)) {
+      print('$category not present in ${photo.name}');
       return;
     }
-    print('Category $category does no exist!');
+    photo.categories.remove(category);
+    return;
   }
 
   void writeDatabaseFile() {
     final data = {
-      'categories': categories,
+      'categories': categories.toList(),
       'photos': photos.map((id, photo) => MapEntry(id, photo.toJson())),
       'Max Order': maxOrder,
     };
@@ -202,11 +217,4 @@ class Database {
     //Writes content in the json file
     dataFile.writeAsStringSync(content);
   }
-}
-
-enum AddCategoryResult {
-  categoryNotFound,
-  photoNotFound,
-  categoryIsAlreadyPresentInPhoto,
-  success
 }

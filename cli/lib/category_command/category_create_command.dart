@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:cli/database.dart';
 
@@ -15,17 +14,16 @@ class CategoryCreateCommand extends Command {
 
   @override
   void run() {
-    final results = argResults!.rest;
+    final categories = argResults!.rest;
 
-    if (results.isEmpty) {
+    if (categories.isEmpty) {
       print('Value(s) not introduced.');
       printUsage();
       return;
     }
 
-    for(String cat in results){
-      bool found = database.lookForCategory(cat);
-      if (found) {
+    for(String cat in categories){
+      if (database.categories.contains(cat)) {
         print('Category: "$cat" already exist.');
         continue;
       }

@@ -29,11 +29,13 @@ class AddCommand extends Command {
     final fileName = results.first;
     final categories = results.skip(1).toList();
 
+    final newCategories = database.validateCategories(categories);
+
     if (fileName == '.') {
-      _fullImport(categories);
+      _fullImport(newCategories);
       return;
     }
-    _singleImport(fileName, categories);
+    _singleImport(fileName, newCategories);
   }
 
   void _fullImport(List<String> categories){
@@ -52,6 +54,7 @@ class AddCommand extends Command {
       }
       if(categories.isNotEmpty) _addCategories(id, categories);
     }
+    print('Photos added successfully!');
     return;
   }
 
@@ -82,6 +85,7 @@ class AddCommand extends Command {
     }
 
     final newId = database.addPhoto(photoFile);
+    print('Photo added successfully!');
 
     if (categories.isNotEmpty) {
       _addCategories(newId, categories);
