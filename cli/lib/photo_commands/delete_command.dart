@@ -21,12 +21,12 @@ class DeleteCommand extends Command {
     if (results.isEmpty) {
       print('Value not introduced.');
       printUsage();
-      exit(1);
+      return;
     }
 
     final fileName = results[0];
 
-    String? id = database.lookForPhotoByName(fileName);
+    String? id = database.fileNameMap[fileName];
 
     if(id == null){
       print("File not found.");

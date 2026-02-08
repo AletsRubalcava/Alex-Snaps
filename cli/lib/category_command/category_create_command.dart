@@ -20,7 +20,7 @@ class CategoryCreateCommand extends Command {
     if (results.isEmpty) {
       print('Value(s) not introduced.');
       printUsage();
-      exit(1);
+      return;
     }
 
     for(String cat in results){

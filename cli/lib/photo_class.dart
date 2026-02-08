@@ -1,4 +1,5 @@
 import 'package:path/path.dart' as path;
+import 'package:uuid/uuid.dart';
 
 class Photo {
   Photo({
@@ -16,7 +17,9 @@ class Photo {
   final List<String> categories;
 
   factory Photo.createID(String arg, int photoOrder) {
-    final id = DateTime.now().millisecondsSinceEpoch.toString();
+    final uuid = Uuid();
+
+    final id = uuid.v4();
     final order = photoOrder;
     final name = arg;
     final route = path.join('app','assets','images',arg);

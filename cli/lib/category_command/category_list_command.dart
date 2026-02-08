@@ -19,14 +19,14 @@ class CategoryListCommand extends Command {
 
     if(results.isNotEmpty){
       print('This command does not accepts arguments');
-      exit(1);
+      return;
     }
 
     List<String> categories = database.getCategories();
 
     if (categories.isEmpty) {
       print('No active categories.');
-      exit(0);
+      return;
     }
 
     print('Active categories:');

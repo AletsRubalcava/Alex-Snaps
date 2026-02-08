@@ -23,18 +23,40 @@ class AddCommand extends Command {
     if (results.isEmpty) {
       print('Value(s) not introduced.');
       printUsage();
-      exit(1);
+      return;
     }
 
     final fileName = results.first;
     final categories = results.skip(1).toList();
 
-    if(fileName == '.'){
-      print('Massive charge');
+    if (fileName == '.') {
+      _fullImport(categories);
       return;
     }
+    _singleImport(fileName, categories);
+  }
 
-    final String? existingId = database.lookForPhotoByName(fileName);
+  void _fullImport(List<String> categories){
+    final import = Directory(
+      path.join(database.projectRoot, 'data', 'import'),
+    );
+    final imageFiles = import.listSync().whereType<File>();
+
+    for (final file in imageFiles) {
+      final fileName = file.uri.pathSegments.last;
+      final id = database.fileNameMap[fileName];
+      if (id == null) {
+        final photoId = database.addPhoto(file);
+        if(categories.isNotEmpty) _addCategories(photoId, categories);
+        continue;
+      }
+      if(categories.isNotEmpty) _addCategories(id, categories);
+    }
+    return;
+  }
+
+  void _singleImport(String fileName, List<String> categories){
+    final String? existingId = database.fileNameMap[fileName];
 
     if (existingId != null) {
       if (categories.isNotEmpty) {
@@ -44,7 +66,9 @@ class AddCommand extends Command {
     }
 
     final File? photoFile = database.lookForFile(
-        fileName, path.join('data', 'import'));
+      fileName,
+      path.join('data', 'import'),
+    );
 
     if (photoFile == null) {
       print('File not found in import directory.');
@@ -57,16 +81,15 @@ class AddCommand extends Command {
       return;
     }
 
-    database.addPhoto(photoFile);
+    final newId = database.addPhoto(photoFile);
 
     if (categories.isNotEmpty) {
-      final newId = database.lookForPhotoByName(fileName)!;
       _addCategories(newId, categories);
     }
   }
 
-  void _addCategories(String id, List<String> categories){
-    for(final cat in categories){
+  void _addCategories(String id, List<String> categories) {
+    for (final cat in categories) {
       database.addCategoryToPhoto(id, cat);
     }
   }

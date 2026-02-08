@@ -8,11 +8,13 @@ class Database {
   late final dataFile = File(path.join(projectRoot, 'data', 'app_data.json'));
   final List<String> categories = [];
   final Map<String, Photo> photos = {};
+  final Map<String, String> fileNameMap = {};
   int maxOrder = 0;
 
   void initialize() {
     lookForEssentialDirectories();
     fillDatabase();
+    setupFileNameMap();
   }
 
   void lookForEssentialDirectories() {
@@ -130,19 +132,21 @@ class Database {
     return categories;
   }
 
-  String? lookForPhotoByName(String name) {
-    final photo = photos.values.where((p) => p.name == name).firstOrNull;
-    return (photo != null) ? photo.id : null;
+  void setupFileNameMap() {
+    fileNameMap
+      ..clear()
+      ..addEntries(photos.values.map((p) => MapEntry(p.name, p.id)));
   }
 
-  void addPhoto(File file) {
+  String addPhoto(File file) {
     final fileName = file.uri.pathSegments.last;
 
-    Photo photo = Photo.createID(fileName, maxOrder+1);
+    Photo photo = Photo.createID(fileName, maxOrder + 1);
 
     photos[photo.id] = photo;
-    movePhoto(file.path,photo.route);
+    movePhoto(file.path, photo.route);
     maxOrder++;
+    return photo.id;
   }
 
   void movePhoto(String fileRoute, String destinyPath) {
@@ -165,27 +169,21 @@ class Database {
     final File? file = lookForFile(photo.name, path.dirname(photo.route));
     photos.remove(id);
 
-    if(file == null) return;
+    if (file == null) return;
     file.deleteSync();
   }
 
-  void addCategoryToPhoto(String id, String category) {
+  AddCategoryResult addCategoryToPhoto(String id, String category) {
     final photo = photos[id];
-    if(photo == null) return;
-
-    if(lookForCategory(category)) {
-      if(!photo.categories.contains(category)) {
-        photo.categories.add(category);
-        return;
-      }
-      print('${photo.name} already is marked as $category');
-      return;
-    }
-    print('Category $category does no exist!');
+    if (photo == null) return AddCategoryResult.photoNotFound;
+    if (!lookForCategory(category)) return AddCategoryResult.categoryNotFound;
+    if (photo.categories.contains(category)) return AddCategoryResult.categoryIsAlreadyPresentInPhoto;
+    photo.categories.add(category);
+    return AddCategoryResult.success;
   }
 
   void removeCategoryToPhoto(String id, String category) {
-    if(lookForCategory(category)) {
+    if (lookForCategory(category)) {
       photos[id]!.categories.remove(category);
       print('Removed: "$category" category!');
       return;
@@ -204,4 +202,11 @@ class Database {
     //Writes content in the json file
     dataFile.writeAsStringSync(content);
   }
+}
+
+enum AddCategoryResult {
+  categoryNotFound,
+  photoNotFound,
+  categoryIsAlreadyPresentInPhoto,
+  success
 }
