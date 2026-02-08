@@ -3,6 +3,7 @@ import 'package:cli/photo_commands/add_command.dart';
 import 'package:cli/category_command/category_command.dart';
 import 'package:cli/database.dart';
 import 'package:cli/photo_commands/delete_command.dart';
+import 'package:cli/truncate_command/truncate_command.dart';
 
 void main(List<String> arguments) {
   final runner = CommandRunner(
@@ -16,6 +17,7 @@ void main(List<String> arguments) {
   runner.addCommand(AddCommand(database));
   runner.addCommand(DeleteCommand(database));
   runner.addCommand(CategoryCommand(database));
+  runner.addCommand(TruncateCommand(database));
   runner.run(arguments);
   database.writeDatabaseFile();
 }
