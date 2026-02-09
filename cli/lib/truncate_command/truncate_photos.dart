@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:cli/database.dart';
+import 'package:cli/truncate_command/truncate_order.dart';
 
 class TruncatePhotosCommand extends Command {
   @override
@@ -30,6 +31,7 @@ class TruncatePhotosCommand extends Command {
 
     if(input == "YES"){
       database.photos.clear();
+      database.maxOrder = 0;
       print('Photos cleared!');
       return;
     }

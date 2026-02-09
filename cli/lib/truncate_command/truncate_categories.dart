@@ -30,6 +30,11 @@ class TruncateCategoriesCommand extends Command {
 
     if(input == "YES"){
       database.categories.clear();
+
+      for(final photo in database.photos.values){
+        photo.categories.clear();
+      }
+
       print('Categories cleared!');
       return;
     }

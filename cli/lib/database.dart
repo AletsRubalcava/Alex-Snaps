@@ -150,10 +150,10 @@ class Database {
       ..addEntries(photos.values.map((p) => MapEntry(p.name, p.id)));
   }
 
-  String addPhoto(File file) {
+  String addPhoto(File file, bool thumb) {
     final fileName = file.uri.pathSegments.last;
 
-    Photo photo = Photo.createID(fileName, maxOrder + 1);
+    Photo photo = Photo.createID(fileName, maxOrder + 1, thumb);
 
     photos[photo.id] = photo;
     movePhoto(file.path, photo.route);

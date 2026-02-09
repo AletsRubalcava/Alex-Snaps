@@ -16,14 +16,19 @@ class Photo {
   final String route;
   final List<String> categories;
 
-  factory Photo.createID(String arg, int photoOrder) {
+  factory Photo.createID(String arg, int photoOrder, bool thumb) {
     final uuid = Uuid();
 
     final id = uuid.v4();
     final order = photoOrder;
-    final name = arg;
-    final route = path.join('app','assets','images',arg);
+    String name = arg;
+    String route = path.join('app','assets','images',arg);
     final List<String> categories = [];
+
+    if(thumb) {
+      name = 'thumb_$arg';
+      route = path.join('app','assets','images','thumbs','thumb_$arg');
+    }
 
     return Photo(id: id, order: order, name: name, route: route, categories: categories);
   }

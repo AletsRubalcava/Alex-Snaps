@@ -5,6 +5,17 @@
 		"Vasconcelos",
 		"Wildlife"
 	],
-	"photos": {},
-	"Max Order": 0
+	"photos": {
+		"2b5127fb-fe97-410d-a75a-df06b483552f": {
+			"id": "2b5127fb-fe97-410d-a75a-df06b483552f",
+			"order": 1,
+			"name": "thumb_IMG_0775.jpg",
+			"route": "app\\assets\\images\\thumbs\\thumb_IMG_0775.jpg",
+			"categories": [
+				"Vasconcelos",
+				"Wildlife"
+			]
+		}
+	},
+	"Max Order": 1
 }

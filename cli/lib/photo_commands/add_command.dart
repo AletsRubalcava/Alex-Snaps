@@ -14,7 +14,13 @@ class AddCommand extends Command {
 
   Database database;
 
-  AddCommand(this.database);
+  AddCommand(this.database){
+    argParser.addFlag(
+        'thumb',
+      abbr: 't',
+      help: 'Marks the photo as a thumbnail.'
+    );
+  }
 
   @override
   void run() {
@@ -28,7 +34,6 @@ class AddCommand extends Command {
 
     final fileName = results.first;
     final categories = results.skip(1).toList();
-
     final newCategories = database.validateCategories(categories);
 
     if (fileName == '.') {
@@ -39,6 +44,8 @@ class AddCommand extends Command {
   }
 
   void _fullImport(List<String> categories){
+    final thumb = argResults!['thumb'] as bool;
+
     final import = Directory(
       path.join(database.projectRoot, 'data', 'import'),
     );
@@ -48,7 +55,7 @@ class AddCommand extends Command {
       final fileName = file.uri.pathSegments.last;
       final id = database.fileNameMap[fileName];
       if (id == null) {
-        final photoId = database.addPhoto(file);
+        final photoId = database.addPhoto(file,thumb);
         if(categories.isNotEmpty) _addCategories(photoId, categories);
         continue;
       }
@@ -59,6 +66,7 @@ class AddCommand extends Command {
   }
 
   void _singleImport(String fileName, List<String> categories){
+    final thumb = argResults!['thumb'] as bool;
     final String? existingId = database.fileNameMap[fileName];
 
     if (existingId != null) {
@@ -84,7 +92,7 @@ class AddCommand extends Command {
       return;
     }
 
-    final newId = database.addPhoto(photoFile);
+    final newId = database.addPhoto(photoFile,thumb);
     print('Photo added successfully!');
 
     if (categories.isNotEmpty) {
