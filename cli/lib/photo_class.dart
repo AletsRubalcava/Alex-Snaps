@@ -74,7 +74,7 @@ class Photo extends Picture {
     required super.categories,
   });
 
-  final int order;
+  int order;
 
   factory Photo.createID(String imageName, int photoOrder) {
     final uuid = Uuid();

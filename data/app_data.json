@@ -8,14 +8,14 @@
 	"photos": {
 		"3263e7b7-f354-4564-8f34-40212eaf7dd6": {
 			"id": "3263e7b7-f354-4564-8f34-40212eaf7dd6",
-			"order": 1,
+			"order": 5,
 			"name": "dummy.jpg",
 			"route": "app\\assets\\images\\dummy.jpg",
 			"categories": []
 		},
 		"eaf9eff9-42c6-49ca-bebb-d19dcdac4ffb": {
 			"id": "eaf9eff9-42c6-49ca-bebb-d19dcdac4ffb",
-			"order": 5,
+			"order": 1,
 			"name": "IMG_1781.jpg",
 			"route": "app\\assets\\images\\IMG_1781.jpg",
 			"categories": []

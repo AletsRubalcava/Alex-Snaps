@@ -14,12 +14,14 @@ class Database {
   final Map<String, Photo> photos = {};
   final Map<String, Thumbnail> thumbs = {};
   final Map<String, String> fileNameMap = {};
+  final Map<int, String> orderMap = {};
   int maxOrder = 0;
 
   void initialize() {
     lookForEssentialDirectories();
     fillDatabase();
     setupFileNameMap();
+    setupOrderFileMap();
   }
 
   void lookForEssentialDirectories() {
@@ -145,6 +147,12 @@ class Database {
       ..clear()
       ..addEntries(photos.values.map((p) => MapEntry(p.name, p.id)))
       ..addEntries(thumbs.values.map((p) => MapEntry(p.name, p.id)));
+  }
+
+  void setupOrderFileMap(){
+    orderMap
+      ..clear()
+      ..addEntries(photos.values.map((p) => MapEntry(p.order, p.id)));
   }
 
   String addPhoto(File file, bool thumb) {
