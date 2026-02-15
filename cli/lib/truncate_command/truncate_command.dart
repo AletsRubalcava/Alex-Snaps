@@ -3,6 +3,7 @@ import 'package:cli/database.dart';
 import 'package:cli/truncate_command/truncate_database.dart';
 import 'package:cli/truncate_command/truncate_order.dart';
 import 'package:cli/truncate_command/truncate_photos.dart';
+import 'package:cli/truncate_command/truncate_thumbs.dart';
 import 'truncate_categories.dart';
 
 class TruncateCommand extends Command {
@@ -20,5 +21,6 @@ class TruncateCommand extends Command {
     addSubcommand(TruncatePhotosCommand(database));
     addSubcommand(TruncateOrderCommand(database));
     addSubcommand(TruncateDatabaseCommand(database));
+    addSubcommand(TruncateThumbsCommand(database));
   }
 }

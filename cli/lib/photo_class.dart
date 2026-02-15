@@ -1,39 +1,123 @@
 import 'package:path/path.dart' as path;
 import 'package:uuid/uuid.dart';
 
-class Photo {
-  Photo({
+abstract class Picture {
+  Picture({
     required this.id,
-    required this.order,
-    required this.route,
     required this.name,
+    required this.route,
     required this.categories,
   });
 
   final String id;
-  final int order;
   final String name;
   final String route;
   final List<String> categories;
 
-  factory Photo.createID(String arg, int photoOrder, bool thumb) {
+  Map<String, dynamic> toJson();
+}
+
+class Thumbnail extends Picture {
+  Thumbnail({
+    required super.id,
+    required super.name,
+    required super.route,
+    required super.categories,
+  });
+
+  factory Thumbnail.createID(
+    String originalImageName,
+  ) {
     final uuid = Uuid();
 
     final id = uuid.v4();
-    final order = photoOrder;
-    String name = arg;
-    String route = path.join('app','assets','images',arg);
-    final List<String> categories = [];
-
-    if(thumb) {
-      name = 'thumb_$arg';
-      route = path.join('app','assets','images','thumbs','thumb_$arg');
+    late final thumbName;
+    if(originalImageName.startsWith('thumb_')){
+        thumbName = originalImageName;
+    }else{
+       thumbName = 'thumb_$originalImageName';
     }
-
-    return Photo(id: id, order: order, name: name, route: route, categories: categories);
+    final route = path.join('app', 'assets', 'images','thumbs', thumbName);
+    return Thumbnail(id: id, name: thumbName, route: route, categories: []);
   }
 
+  factory Thumbnail.decode(dynamic thumb){
+        final thumbId = thumb['id'] as String;
+        final name = thumb['name'] as String;
+        final route = thumb['route'] as String;
+        //To every element in categories, converts it into the expected type
+        final photoCategories = (thumb['categories'] as List<dynamic>)
+            .map((cat) => cat.toString())
+            .toList(); //Returns an iterable, converts it into a list
+
+        final thumbObj = Thumbnail(
+          id: thumbId,
+          route: route,
+          name: name,
+          categories: photoCategories,
+        );
+        return thumbObj;
+  }
+
+  @override
   Map<String, dynamic> toJson() {
-    return {'id': id, 'order': order, 'name': name, 'route': route, 'categories': categories};
+    return {'id': id, 'name': name, 'route': route, 'categories': categories};
+  }
+}
+
+class Photo extends Picture {
+  Photo({
+    required super.id,
+    required this.order,
+    required super.name,
+    required super.route,
+    required super.categories,
+  });
+
+  final int order;
+
+  factory Photo.createID(String imageName, int photoOrder) {
+    final uuid = Uuid();
+
+    final id = uuid.v4();
+    final route = path.join('app', 'assets', 'images', imageName);
+    return Photo(
+      id: id,
+      order: photoOrder,
+      name: imageName,
+      route: route,
+      categories: [],
+    );
+  }
+
+  factory Photo.decode(Map<String,dynamic> photo){
+        final photoId = photo['id'] as String;
+        final order = photo['order'] as int;
+        final name = photo['name'] as String;
+        final route = photo['route'] as String;
+        //To every element in categories, converts it into the expected type
+        final photoCategories = (photo['categories'] as List<dynamic>)
+            .map((cat) => cat.toString())
+            .toList(); //Returns an iterable, converts it into a list
+
+        final photoObj = Photo(
+          id: photoId,
+          order: order,
+          route: route,
+          name: name,
+          categories: photoCategories,
+        );
+        return photoObj;
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'order': order,
+      'name': name,
+      'route': route,
+      'categories': categories,
+    };
   }
 }

@@ -5,9 +5,14 @@ import 'package:path/path.dart' as path;
 
 class Database {
   final projectRoot = path.dirname(Directory.current.path);
+
+  late final imageDir = Directory(path.join(projectRoot,'app','assets','images'));
+  late final thumbDir = Directory(path.join(imageDir.path,'thumbs'));
   late final dataFile = File(path.join(projectRoot, 'data', 'app_data.json'));
+
   final Set<String> categories = {};
   final Map<String, Photo> photos = {};
+  final Map<String, Thumbnail> thumbs = {};
   final Map<String, String> fileNameMap = {};
   int maxOrder = 0;
 
@@ -76,30 +81,21 @@ class Database {
     photos.clear();
     //Creates a map from a set of map entries
     photos.addAll(
-      photosJson.map((id, photoData) {
-        final photoMap = photoData as Map<String, dynamic>;
-
-        final photoId = photoMap['id'] as String;
-        final order = photoMap['order'] as int;
-        final name = photoMap['name'] as String;
-        final route = photoMap['route'] as String;
-        //To every element in categories, converts it into the expected type
-        final photoCategories = (photoMap['categories'] as List<dynamic>)
-            .map((cat) => cat.toString())
-            .toList(); //Returns an iterable, converts it into a list
-
-        final photoObj = Photo(
-          id: photoId,
-          order: order,
-          route: route,
-          name: name,
-          categories: photoCategories,
-        );
-        return MapEntry(id, photoObj);
-      }),
+        photosJson.map((id,photoData){
+          return MapEntry(id, Photo.decode(photoData as Map<String,dynamic>));
+        })
     );
-    final dataOrder = data['Max Order'] as int;
-    maxOrder = dataOrder;
+
+    final thumbsJson = (data['thumbs'] as Map<String, dynamic>?) ?? {};
+    thumbs.clear();
+    thumbs.addAll(
+        thumbsJson.map((id,thumbData){
+        return MapEntry(id, Thumbnail.decode(thumbData as Map<String,dynamic>));
+      })
+    );
+
+    final dataOrder = data['max order'] as int?;
+    maxOrder = dataOrder ?? 0;
   }
 
   File? lookForFile(String fileName, String dir) {
@@ -147,18 +143,27 @@ class Database {
   void setupFileNameMap() {
     fileNameMap
       ..clear()
-      ..addEntries(photos.values.map((p) => MapEntry(p.name, p.id)));
+      ..addEntries(photos.values.map((p) => MapEntry(p.name, p.id)))
+      ..addEntries(thumbs.values.map((p) => MapEntry(p.name, p.id)));
   }
 
   String addPhoto(File file, bool thumb) {
     final fileName = file.uri.pathSegments.last;
 
-    Photo photo = Photo.createID(fileName, maxOrder + 1, thumb);
+    // ignore: prefer_typing_uninitialized_variables
+    late final picture;
 
-    photos[photo.id] = photo;
-    movePhoto(file.path, photo.route);
-    maxOrder++;
-    return photo.id;
+    if(thumb){
+      picture = Thumbnail.createID(fileName);
+      thumbs[picture.id] = picture;
+    }else{
+      picture = Photo.createID(fileName, maxOrder + 1);
+      photos[picture.id] = picture;
+      maxOrder++;
+    }
+    fileNameMap[picture.name] = picture.id;
+    movePhoto(file.path, picture.route);
+    return picture.id;
   }
 
   void movePhoto(String fileRoute, String destinyPath) {
@@ -210,7 +215,8 @@ class Database {
     final data = {
       'categories': categories.toList(),
       'photos': photos.map((id, photo) => MapEntry(id, photo.toJson())),
-      'Max Order': maxOrder,
+      'thumbs': thumbs.map((id, photo) => MapEntry(id, photo.toJson())),
+      'max order': maxOrder,
     };
     //Converts data into json format with auto indentation
     final content = JsonEncoder.withIndent('\t').convert(data);

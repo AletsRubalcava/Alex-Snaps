@@ -2,17 +2,17 @@ import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:cli/database.dart';
 
-class TruncatePhotosCommand extends Command {
+class TruncateThumbsCommand extends Command {
   @override
-  final name = 'photos';
+  final name = 'thumbs';
 
   @override
   final description =
-      'Truncates the photos from de database.';
+      'Truncates the thumbs from de data file.';
 
   final Database database;
 
-  TruncatePhotosCommand(this.database);
+  TruncateThumbsCommand(this.database);
 
   @override
   void run() {
@@ -23,15 +23,14 @@ class TruncatePhotosCommand extends Command {
       return;
     }
 
-    print('This will delete all the photos, are you sure you want to continue?');
+    print('This will delete all the thumbs, are you sure you want to continue?');
     print('Type "YES" to continue, anything else to abort.');
 
     String? input = stdin.readLineSync();
 
     if(input == "YES"){
-      database.photos.clear();
-      database.maxOrder = 0;
-      print('Photos cleared!');
+      database.thumbs.clear();
+      print('Thumbs cleared!');
       return;
     }
     print('Aborting.');
