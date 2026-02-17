@@ -31,7 +31,7 @@ class Thumbnail extends Picture {
     final uuid = Uuid();
 
     final id = uuid.v4();
-    late final thumbName;
+    late final String thumbName;
     if(originalImageName.startsWith('thumb_')){
         thumbName = originalImageName;
     }else{
@@ -44,7 +44,7 @@ class Thumbnail extends Picture {
   factory Thumbnail.decode(dynamic thumb){
         final thumbId = thumb['id'] as String;
         final name = thumb['name'] as String;
-        final route = thumb['route'] as String;
+        final newRoute = path.join('app','assets','images','thumbs',name);
         //To every element in categories, converts it into the expected type
         final photoCategories = (thumb['categories'] as List<dynamic>)
             .map((cat) => cat.toString())
@@ -52,7 +52,7 @@ class Thumbnail extends Picture {
 
         final thumbObj = Thumbnail(
           id: thumbId,
-          route: route,
+          route: newRoute,
           name: name,
           categories: photoCategories,
         );
@@ -94,7 +94,7 @@ class Photo extends Picture {
         final photoId = photo['id'] as String;
         final order = photo['order'] as int;
         final name = photo['name'] as String;
-        final route = photo['route'] as String;
+        final newRoute = path.join('app','assets','images',name);
         //To every element in categories, converts it into the expected type
         final photoCategories = (photo['categories'] as List<dynamic>)
             .map((cat) => cat.toString())
@@ -103,7 +103,7 @@ class Photo extends Picture {
         final photoObj = Photo(
           id: photoId,
           order: order,
-          route: route,
+          route: newRoute,
           name: name,
           categories: photoCategories,
         );

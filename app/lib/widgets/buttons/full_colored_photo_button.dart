@@ -20,7 +20,7 @@ class FullColoredPhotoButton extends StatelessWidget {
           PageRouteBuilder(
             pageBuilder: (_, _, _) => GalleryPhotoPage(),
             transitionDuration: const Duration(milliseconds: 0),
-            reverseTransitionDuration: Duration(milliseconds: 200),
+            reverseTransitionDuration: Duration(milliseconds: 0),
             transitionsBuilder: (_,animation,_,child){
               final offset = Tween(
                 begin: const Offset(1, 0),

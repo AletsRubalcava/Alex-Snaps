@@ -3,6 +3,7 @@ import 'package:cli/photo_commands/add_command.dart';
 import 'package:cli/category_command/category_command.dart';
 import 'package:cli/database.dart';
 import 'package:cli/photo_commands/delete_command.dart';
+import 'package:cli/rearrange_command.dart';
 import 'package:cli/repair_command.dart';
 import 'package:cli/switch_command.dart';
 import 'package:cli/truncate_command/truncate_command.dart';
@@ -14,7 +15,7 @@ void main(List<String> arguments) {
   );
 
   Database database = Database();
-  database.initialize();
+  database.load();
 
   runner.addCommand(AddCommand(database));
   runner.addCommand(DeleteCommand(database));
@@ -22,6 +23,7 @@ void main(List<String> arguments) {
   runner.addCommand(TruncateCommand(database));
   runner.addCommand(RepairCommand(database));
   runner.addCommand(SwitchCommand(database));
+  runner.addCommand(RearrangeCommand(database));
   runner.run(arguments);
-  database.writeDatabaseFile();
+  database.save();
 }

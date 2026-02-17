@@ -1,5 +1,6 @@
 import 'package:args/command_runner.dart';
 import 'package:cli/database.dart';
+import 'package:cli/photo_class.dart';
 
 class SwitchCommand extends Command {
   @override
@@ -22,7 +23,7 @@ class SwitchCommand extends Command {
     }
 
     if (results.length != 2) {
-      print('This command requieres two arguments');
+      print('This command requires two arguments');
       printUsage();
       return;
     }
@@ -30,44 +31,39 @@ class SwitchCommand extends Command {
     final originalOrder = results.first;
     final targetOrder = results.last;
 
-    //Checks if the second argument is an int
-    if (int.tryParse(targetOrder) == null) {
-      print('Second argument must be an int');
+    final photo1 = _findPhoto(originalOrder);
+
+    if (photo1 == null) {
+      print('Photo $originalOrder was not found.');
       return;
     }
 
-    //Checks if the photo with order targetOrder exists
-    var target = database.photos.values
-        .where((photo) => photo.order.toString() == targetOrder)
-        .firstOrNull;
-    if (target == null) {
-      print('Photo in order $targetOrder was not found.');
+    final photo2 = _findPhoto(targetOrder);
+    if (photo2 == null) {
+      print('Photo $targetOrder was not found.');
       return;
     }
-
-    late final String? photoId;
-
-    //Checks if th first argument is an int
-    if (int.tryParse(originalOrder) != null) {
-      photoId = database.orderMap[int.parse(originalOrder)];
-      if (photoId == null) {
-        print('Photo in order $originalOrder was not found.');
-        return;
-      }
-    }else {
-      //Checks if the photo with the introduced filename exist
-      photoId = database.fileNameMap[originalOrder];
-      if (photoId == null) {
-        print('Photo $originalOrder was not found.');
-        return;
-      }
-    }
-    final photo = database.photos[photoId];
 
     //Swaps the orders
-    final temp = photo!.order;
-    photo.order = target.order;
-    target.order = temp;
-    print('Photo order changed!');
+    final temp = photo1.order;
+    photo1.order = photo2.order;
+    photo2.order = temp;
+    print(
+      'Successfully switched order between "${photo1.name}" and "${photo2.name}".',
+    );
+
+    database.save();
+  }
+
+  Photo? _findPhoto(String value) {
+    final order = int.tryParse(value);
+    String? photoId;
+    if (order != null) {
+      photoId = database.orderMap[order];
+    } else {
+      photoId = database.fileNameMap[value];
+    }
+    if (photoId == null) return null;
+    return database.photos[photoId];
   }
 }

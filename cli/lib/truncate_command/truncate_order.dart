@@ -31,6 +31,7 @@ class TruncateOrderCommand extends Command {
     if(input == "YES"){
       database.maxOrder = 0;
       print('Max order reset!');
+      database.save();
       return;
     }
     print('Aborting.');

@@ -8,38 +8,53 @@
 	"photos": {
 		"3263e7b7-f354-4564-8f34-40212eaf7dd6": {
 			"id": "3263e7b7-f354-4564-8f34-40212eaf7dd6",
-			"order": 5,
+			"order": 1,
 			"name": "dummy.jpg",
 			"route": "app\\assets\\images\\dummy.jpg",
-			"categories": []
+			"categories": [
+				"Vasconcelos",
+				"Wildlife"
+			]
 		},
 		"eaf9eff9-42c6-49ca-bebb-d19dcdac4ffb": {
 			"id": "eaf9eff9-42c6-49ca-bebb-d19dcdac4ffb",
-			"order": 1,
+			"order": 5,
 			"name": "IMG_1781.jpg",
 			"route": "app\\assets\\images\\IMG_1781.jpg",
-			"categories": []
+			"categories": [
+				"Vasconcelos",
+				"Wildlife"
+			]
 		},
 		"9e5d4232-c4c4-478b-aa8b-7424d8ba61f4": {
 			"id": "9e5d4232-c4c4-478b-aa8b-7424d8ba61f4",
-			"order": 6,
+			"order": 3,
 			"name": "IMG_0790.jpg",
 			"route": "app\\assets\\images\\IMG_0790.jpg",
-			"categories": []
+			"categories": [
+				"Vasconcelos",
+				"Wildlife"
+			]
 		},
 		"8060fffd-8759-479e-a724-e3520b59ef7f": {
 			"id": "8060fffd-8759-479e-a724-e3520b59ef7f",
-			"order": 7,
+			"order": 4,
 			"name": "IMG_0775.jpg",
 			"route": "app\\assets\\images\\IMG_0775.jpg",
-			"categories": []
+			"categories": [
+				"Vasconcelos",
+				"Wildlife"
+			]
 		},
 		"b90d5223-6930-48ae-8870-6c579a5bf7cc": {
 			"id": "b90d5223-6930-48ae-8870-6c579a5bf7cc",
-			"order": 8,
+			"order": 2,
 			"name": "IMG_1661.jpg",
 			"route": "app\\assets\\images\\IMG_1661.jpg",
-			"categories": []
+			"categories": [
+				"Vasconcelos",
+				"Wildlife"
+			]
 		}
 	},
 	"thumbs": {
@@ -68,5 +83,5 @@
 			"categories": []
 		}
 	},
-	"max order": 8
+	"max order": 5
 }

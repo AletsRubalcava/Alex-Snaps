@@ -43,5 +43,7 @@ class DeleteCommand extends Command {
     }
     database.removePhoto(id);
     print('Photo deleted successfully!');
+
+    database.save();
   }
 }

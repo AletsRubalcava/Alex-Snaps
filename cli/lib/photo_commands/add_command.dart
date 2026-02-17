@@ -41,6 +41,8 @@ class AddCommand extends Command {
       return;
     }
     _singleImport(fileName, newCategories);
+
+    database.save();
   }
 
   void _fullImport(List<String> categories){

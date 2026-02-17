@@ -31,5 +31,11 @@ class CategoryRemoveCommand extends Command {
         print('Category $cat removed!');
       }
     }
+
+    for (var photo in database.photos.values) {
+      photo.categories.removeWhere((cat) => newCategories.contains(cat));
+    }
+
+    database.save();
   }
 }

@@ -1,4 +1,4 @@
-import 'package:alex_snaps/general/bottom_navigation_bar.dart';
+import 'bottom_nav_bar/bottom_navigation_bar.dart';
 import 'package:alex_snaps/general/header.dart';
 import 'package:alex_snaps/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';

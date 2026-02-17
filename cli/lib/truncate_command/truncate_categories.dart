@@ -36,6 +36,7 @@ class TruncateCategoriesCommand extends Command {
       }
 
       print('Categories cleared!');
+      database.save();
       return;
     }
     print('Aborting.');

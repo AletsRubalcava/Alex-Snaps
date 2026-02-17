@@ -31,6 +31,7 @@ class TruncateThumbsCommand extends Command {
     if(input == "YES"){
       database.thumbs.clear();
       print('Thumbs cleared!');
+      database.save();
       return;
     }
     print('Aborting.');

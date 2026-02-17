@@ -17,11 +17,9 @@ class Database {
   final Map<int, String> orderMap = {};
   int maxOrder = 0;
 
-  void initialize() {
+  void load() {
     lookForEssentialDirectories();
     fillDatabase();
-    setupFileNameMap();
-    setupOrderFileMap();
   }
 
   void lookForEssentialDirectories() {
@@ -49,7 +47,7 @@ class Database {
     //If file doesn't exist
     if (!dataFile.existsSync()) {
       dataFile.createSync();
-      writeDatabaseFile();
+      save();
       return;
     }
 
@@ -63,13 +61,13 @@ class Database {
       data = jsonDecode(content) as Map<String, dynamic>;
     } catch (_) {
       print('Corrupted database file, recreating file.');
-      writeDatabaseFile();
+      save();
       return;
     }
 
     //If json is empty
     if (content.trim().isEmpty) {
-      writeDatabaseFile();
+      save();
       return;
     }
 
@@ -98,6 +96,9 @@ class Database {
 
     final dataOrder = data['max order'] as int?;
     maxOrder = dataOrder ?? 0;
+
+    updateFileNameMap();
+    updateMaxOrderFileMap();
   }
 
   File? lookForFile(String fileName, String dir) {
@@ -142,17 +143,18 @@ class Database {
     return categories;
   }
 
-  void setupFileNameMap() {
+  void updateFileNameMap() {
     fileNameMap
       ..clear()
       ..addEntries(photos.values.map((p) => MapEntry(p.name, p.id)))
       ..addEntries(thumbs.values.map((p) => MapEntry(p.name, p.id)));
   }
 
-  void setupOrderFileMap(){
+  void updateMaxOrderFileMap(){
     orderMap
       ..clear()
       ..addEntries(photos.values.map((p) => MapEntry(p.order, p.id)));
+    maxOrder = orderMap.length;
   }
 
   String addPhoto(File file, bool thumb) {
@@ -167,9 +169,7 @@ class Database {
     }else{
       picture = Photo.createID(fileName, maxOrder + 1);
       photos[picture.id] = picture;
-      maxOrder++;
     }
-    fileNameMap[picture.name] = picture.id;
     movePhoto(file.path, picture.route);
     return picture.id;
   }
@@ -219,7 +219,7 @@ class Database {
     return;
   }
 
-  void writeDatabaseFile() {
+  void save() {
     final data = {
       'categories': categories.toList(),
       'photos': photos.map((id, photo) => MapEntry(id, photo.toJson())),
@@ -230,5 +230,8 @@ class Database {
     final content = JsonEncoder.withIndent('\t').convert(data);
     //Writes content in the json file
     dataFile.writeAsStringSync(content);
+
+    updateFileNameMap();
+    updateMaxOrderFileMap();
   }
 }

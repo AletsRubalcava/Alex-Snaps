@@ -17,13 +17,13 @@ class MainGalleryPageListView extends StatelessWidget {
     final double spacing = 15;
 
     final items = [
-      TitleText(
-        text: Strings.galleryPageTitle,
+      Column(
+        children: [
+          TitleText(text: Strings.galleryPageTitle),
+          FilterSearchButton(text: Strings.filterSearch),
+        ],
       ),
-      FilterSearchButton(text: Strings.filterSearch),
-      FullColoredPhotoButton(
-        text: Strings.mainGalleryButton,
-      ),
+      FullColoredPhotoButton(text: Strings.mainGalleryButton),
       RowGalleryButtons(
         leftText: Strings.galleryColumnOneLeftButton,
         rightText: Strings.galleryColumnOneRightButton,
@@ -68,7 +68,7 @@ class MainGalleryPageListView extends StatelessWidget {
           //Anonymous function that is called everytime a build is finished to
           //separate the elements in the list. The separator is a
           // SizedBox of height spacing (variable)
-          separatorBuilder: (_,_) => SizedBox(height: spacing),
+          separatorBuilder: (_, _) => SizedBox(height: spacing),
           padding: EdgeInsets.only(
             bottom: height * 0.02,
             left: width * 0.08,

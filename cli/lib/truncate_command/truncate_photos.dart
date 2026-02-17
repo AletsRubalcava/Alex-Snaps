@@ -32,6 +32,7 @@ class TruncatePhotosCommand extends Command {
       database.photos.clear();
       database.maxOrder = 0;
       print('Photos cleared!');
+      database.save();
       return;
     }
     print('Aborting.');

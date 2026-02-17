@@ -32,5 +32,6 @@ class CategoryListCommand extends Command {
     for (final category in categories) {
       print(category);
     }
+    database.save();
   }
 }

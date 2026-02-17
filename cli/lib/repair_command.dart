@@ -28,6 +28,8 @@ class RepairCommand extends Command {
     _addMissingDatabaseEntries();
     //Removes the orphaned entries from the database
     _removeOrphanDatabaseEntries();
+
+    database.save();
   }
 
   void _addMissingDatabaseEntries() {

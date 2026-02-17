@@ -15,6 +15,8 @@ class AppIcons{
   final String homeBold = 'assets/icons/home_bold.svg';
   final String layoutGridBold = 'assets/icons/layout_grid_bold.svg';
   final String userBold = 'assets/icons/user_bold.svg';
+
+  final String instagramIcon = 'assets/icons/instagram.svg';
 }
 
 class AppImages{
@@ -36,4 +38,6 @@ class AppImages{
   final String galleryColumnOneRightButton = 'assets/images/dummy.jpg';
   final String galleryColumnTwoLeftButton = 'assets/images/dummy.jpg';
   final String galleryColumnTwoRightButton = 'assets/images/dummy.jpg';
+  final String aboutMePicture = 'assets/images/dummy.jpg';
+
 }

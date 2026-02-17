@@ -30,5 +30,6 @@ class CategoryCreateCommand extends Command {
       database.addCategory(cat);
       print('Category $cat added!');
     }
+    database.save();
   }
 }
