@@ -7,13 +7,17 @@ import 'package:flutter/services.dart';
 import 'package:alex_snaps/app_content/strings.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({required this.onNavigate, super.key});
+
+  final Function(int) onNavigate;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  _HomeScreenState();
+
   @override
   void initState() {
     super.initState();
@@ -58,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 secondaryButtonAspectRatio: secondaryButtonAspectRatio,
               ),
               Spacer(),
-              AboutMeButton(width: width, height: height),
+              AboutMeButton(width: width, height: height, onNavigate: widget.onNavigate),
               Spacer(),
             ],
           ),

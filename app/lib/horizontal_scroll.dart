@@ -21,10 +21,26 @@ class HorizontalScroll extends StatefulWidget {
 }
 
 class _HorizontalScroll extends State<HorizontalScroll> {
+
+  PageController controller = PageController(initialPage: 1);
+
+  @override void initState() {
+    super.initState();
+  }
+
+  @override void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  void goToPage(int page) {
+    if (controller.hasClients && !controller.position.isScrollingNotifier.value) {
+      controller.jumpToPage(page);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final PageController controller = PageController(initialPage: 1);
-
     return Scaffold(
       backgroundColor: Color(0xFF2D2D2D),
       appBar: Header(),
@@ -35,7 +51,7 @@ class _HorizontalScroll extends State<HorizontalScroll> {
         //this function does not return anything, but changes the
         // allowedVerticalScroll variable y the parent
         onPageChanged: widget.onPageChanged,
-        children: const [MainGalleryPageListView(), HomeScreen(), AboutMePage()],
+        children: [MainGalleryPageListView(), HomeScreen(onNavigate: goToPage), AboutMePage()],
       ),
       bottomNavigationBar: BottomNavBar(currentPage: widget.currentPage),
     );
