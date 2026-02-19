@@ -53,7 +53,7 @@ class _HorizontalScroll extends State<HorizontalScroll> {
         onPageChanged: widget.onPageChanged,
         children: [MainGalleryPageListView(), HomeScreen(onNavigate: goToPage), AboutMePage()],
       ),
-      bottomNavigationBar: BottomNavBar(currentPage: widget.currentPage),
+      bottomNavigationBar: BottomNavBar(currentPage: widget.currentPage, onNavigate: goToPage),
     );
   }
 }

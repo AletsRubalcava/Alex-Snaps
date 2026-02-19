@@ -2,29 +2,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 
 class BottomNavButton extends StatelessWidget {
-  const BottomNavButton({
+  BottomNavButton({
     required this.icon,
     required this.iconSize,
-    required this.newPage,
+    required this.onNavigate,
+    required this.pageIndex,
     super.key,
   });
 
   final String icon;
   final double iconSize;
-  final Widget newPage;
+  Function(int) onNavigate;
+  final int pageIndex;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushReplacement(
-          context,
-          PageRouteBuilder(
-            pageBuilder: (_, _, _) => newPage,
-            transitionDuration: Duration(milliseconds: 0),
-            reverseTransitionDuration: Duration(milliseconds: 0),
-          ),
-        );
+        onNavigate(pageIndex);
       },
       child: SvgPicture.asset(
         icon,

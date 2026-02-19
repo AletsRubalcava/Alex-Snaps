@@ -6,9 +6,10 @@ import 'package:alex_snaps/app_content/assets.dart';
 import 'package:alex_snaps/widgets/buttons/bottom_nav_button.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({required this.currentPage, super.key});
+  BottomNavBar({required this.onNavigate, required this.currentPage, super.key});
 
   final int currentPage;
+  Function(int) onNavigate;
 
   @override
   State<BottomNavBar> createState() => _BottomNavBar();
@@ -47,29 +48,23 @@ class _BottomNavBar extends State<BottomNavBar> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SvgPicture.asset(
-                  galleryIcon,
-                  width: iconSize,
-                  colorFilter: ColorFilter.mode(
-                    Color(0xFF316163),
-                    BlendMode.srcIn,
-                  ),
+                BottomNavButton(
+                    icon: galleryIcon,
+                    iconSize: iconSize,
+                    onNavigate: widget.onNavigate,
+                  pageIndex: 0,
                 ),
-                SvgPicture.asset(
-                  homeIcon,
-                  width: iconSize,
-                  colorFilter: ColorFilter.mode(
-                    Color(0xFF316163),
-                    BlendMode.srcIn,
-                  ),
+                BottomNavButton(
+                  icon: homeIcon,
+                  iconSize: iconSize,
+                  onNavigate: widget.onNavigate,
+                  pageIndex: 1,
                 ),
-                SvgPicture.asset(
-                  userIcon,
-                  width: iconSize,
-                  colorFilter: ColorFilter.mode(
-                    Color(0xFF316163),
-                    BlendMode.srcIn,
-                  ),
+                BottomNavButton(
+                  icon: userIcon,
+                  iconSize: iconSize,
+                  onNavigate: widget.onNavigate,
+                  pageIndex: 2,
                 ),
               ],
             ),
