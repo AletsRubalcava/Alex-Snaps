@@ -1,7 +1,4 @@
-import 'package:alex_snaps/gallery/main_gallery_page_list_view.dart';
-import 'package:alex_snaps/horizontal_scroll.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:alex_snaps/app_content/assets.dart';
 import 'package:alex_snaps/widgets/buttons/bottom_nav_button.dart';
 

@@ -1,14 +1,18 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:cli/photo_class.dart';
+import 'package:shared/photo_class.dart';
 import 'package:path/path.dart' as path;
 
 class Database {
   final projectRoot = path.dirname(Directory.current.path);
 
-  late final imageDir = Directory(path.join(projectRoot,'app','assets','images'));
-  late final thumbDir = Directory(path.join(imageDir.path,'thumbs'));
-  late final dataFile = File(path.join(projectRoot, 'data', 'app_data.json'));
+  late final imageDir = Directory(
+    path.join(projectRoot, 'app', 'assets', 'images'),
+  );
+  late final thumbDir = Directory(path.join(imageDir.path, 'thumbs'));
+  late final dataFile = File(
+    path.join(projectRoot, 'cli', 'data', 'app_data.json'),
+  );
 
   final Set<String> categories = {};
   final Map<String, Photo> photos = {};
@@ -24,9 +28,9 @@ class Database {
 
   void lookForEssentialDirectories() {
     final directories = [
-      'data/import',
-      'app/assets/icons',
-      'app/assets/images/thumbs',
+      path.join('cli', 'data', 'import'),
+      path.join('app', 'assets', 'icons'),
+      path.join('app', 'assets', 'images', 'thumbs'),
     ];
 
     for (final dir in directories) {
@@ -81,17 +85,20 @@ class Database {
     photos.clear();
     //Creates a map from a set of map entries
     photos.addAll(
-        photosJson.map((id,photoData){
-          return MapEntry(id, Photo.decode(photoData as Map<String,dynamic>));
-        })
+      photosJson.map((id, photoData) {
+        return MapEntry(id, Photo.decode(photoData as Map<String, dynamic>));
+      }),
     );
 
     final thumbsJson = (data['thumbs'] as Map<String, dynamic>?) ?? {};
     thumbs.clear();
     thumbs.addAll(
-        thumbsJson.map((id,thumbData){
-        return MapEntry(id, Thumbnail.decode(thumbData as Map<String,dynamic>));
-      })
+      thumbsJson.map((id, thumbData) {
+        return MapEntry(
+          id,
+          Thumbnail.decode(thumbData as Map<String, dynamic>),
+        );
+      }),
     );
 
     final dataOrder = data['max order'] as int?;
@@ -150,7 +157,7 @@ class Database {
       ..addEntries(thumbs.values.map((p) => MapEntry(p.name, p.id)));
   }
 
-  void updateMaxOrderFileMap(){
+  void updateMaxOrderFileMap() {
     orderMap
       ..clear()
       ..addEntries(photos.values.map((p) => MapEntry(p.order, p.id)));
@@ -163,10 +170,10 @@ class Database {
     // ignore: prefer_typing_uninitialized_variables
     late final picture;
 
-    if(thumb){
+    if (thumb) {
       picture = Thumbnail.createID(fileName);
       thumbs[picture.id] = picture;
-    }else{
+    } else {
       picture = Photo.createID(fileName, maxOrder + 1);
       photos[picture.id] = picture;
     }
@@ -202,16 +209,16 @@ class Database {
     final photo = photos[id];
     if (photo == null) return;
 
-    if(!photo.categories.contains(category)) {
+    if (!photo.categories.contains(category)) {
       photo.categories.add(category);
     }
   }
 
   void removeCategoryToPhoto(String id, String category) {
     final photo = photos[id];
-    if(photo == null) return;
+    if (photo == null) return;
 
-    if(!photo.categories.contains(category)) {
+    if (!photo.categories.contains(category)) {
       print('$category not present in ${photo.name}');
       return;
     }

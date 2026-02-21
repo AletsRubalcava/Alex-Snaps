@@ -1,19 +1,16 @@
-name: cli
-description: A sample command-line application.
+name: shared
+description: A starting point for Dart libraries or applications.
 version: 1.0.0
 # repository: https://github.com/my_org/my_repo
 
 environment:
-  sdk: ^3.10.7
+  sdk: ^3.11.0
 
 # Add regular dependencies here.
 dependencies:
-  path: ^1.9.0
-  args: ^2.4.2
-  shared:
-    path: ../shared/
+  uuid: ^4.0.0
+  # path: ^1.9.0
 
 dev_dependencies:
   lints: ^6.0.0
   test: ^1.25.6
-

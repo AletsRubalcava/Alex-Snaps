@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:cli/database.dart';
-import 'package:cli/photo_class.dart';
+import 'package:shared/photo_class.dart';
 
 class RepairCommand extends Command {
   @override

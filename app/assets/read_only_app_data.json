@@ -1,0 +1,87 @@
+{
+	"categories": [
+		"Party",
+		"Veracruz",
+		"Vasconcelos",
+		"Wildlife"
+	],
+	"photos": {
+		"3263e7b7-f354-4564-8f34-40212eaf7dd6": {
+			"id": "3263e7b7-f354-4564-8f34-40212eaf7dd6",
+			"order": 1,
+			"name": "dummy.jpg",
+			"route": "app\\assets\\images\\dummy.jpg",
+			"categories": [
+				"Vasconcelos",
+				"Wildlife"
+			]
+		},
+		"eaf9eff9-42c6-49ca-bebb-d19dcdac4ffb": {
+			"id": "eaf9eff9-42c6-49ca-bebb-d19dcdac4ffb",
+			"order": 5,
+			"name": "IMG_1781.jpg",
+			"route": "app\\assets\\images\\IMG_1781.jpg",
+			"categories": [
+				"Vasconcelos",
+				"Wildlife"
+			]
+		},
+		"9e5d4232-c4c4-478b-aa8b-7424d8ba61f4": {
+			"id": "9e5d4232-c4c4-478b-aa8b-7424d8ba61f4",
+			"order": 3,
+			"name": "IMG_0790.jpg",
+			"route": "app\\assets\\images\\IMG_0790.jpg",
+			"categories": [
+				"Vasconcelos",
+				"Wildlife"
+			]
+		},
+		"8060fffd-8759-479e-a724-e3520b59ef7f": {
+			"id": "8060fffd-8759-479e-a724-e3520b59ef7f",
+			"order": 4,
+			"name": "IMG_0775.jpg",
+			"route": "app\\assets\\images\\IMG_0775.jpg",
+			"categories": [
+				"Vasconcelos",
+				"Wildlife"
+			]
+		},
+		"b90d5223-6930-48ae-8870-6c579a5bf7cc": {
+			"id": "b90d5223-6930-48ae-8870-6c579a5bf7cc",
+			"order": 2,
+			"name": "IMG_1661.jpg",
+			"route": "app\\assets\\images\\IMG_1661.jpg",
+			"categories": [
+				"Vasconcelos",
+				"Wildlife"
+			]
+		}
+	},
+	"thumbs": {
+		"aac39767-f09e-4d32-9980-5f4e0aa3a8fb": {
+			"id": "aac39767-f09e-4d32-9980-5f4e0aa3a8fb",
+			"name": "thumb_IMG_0775.jpg",
+			"route": "app\\assets\\images\\thumbs\\thumb_IMG_0775.jpg",
+			"categories": []
+		},
+		"439f931a-6e83-474c-ac94-34220514141f": {
+			"id": "439f931a-6e83-474c-ac94-34220514141f",
+			"name": "thumb_IMG_1781.jpg",
+			"route": "app\\assets\\images\\thumbs\\thumb_IMG_1781.jpg",
+			"categories": []
+		},
+		"89e97b22-91a1-4783-b45c-c3fedb9b4f23": {
+			"id": "89e97b22-91a1-4783-b45c-c3fedb9b4f23",
+			"name": "thumb_IMG_0701.jpg",
+			"route": "app\\assets\\images\\thumbs\\thumb_IMG_0701.jpg",
+			"categories": []
+		},
+		"60f0f9c7-c5ea-41b3-8ebc-3cc0fdaf077e": {
+			"id": "60f0f9c7-c5ea-41b3-8ebc-3cc0fdaf077e",
+			"name": "thumb_IMG_1661.jpg",
+			"route": "app\\assets\\images\\thumbs\\thumb_IMG_1661.jpg",
+			"categories": []
+		}
+	},
+	"max order": 5
+}

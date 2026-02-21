@@ -1,5 +1,5 @@
 import 'package:path/path.dart' as path;
-import 'package:uuid/uuid.dart';
+import "package:uuid/uuid.dart";
 
 abstract class Picture {
   Picture({

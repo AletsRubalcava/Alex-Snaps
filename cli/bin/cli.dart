@@ -1,4 +1,5 @@
 import 'package:args/command_runner.dart';
+import 'package:cli/export_command.dart';
 import 'package:cli/photo_commands/add_command.dart';
 import 'package:cli/category_command/category_command.dart';
 import 'package:cli/database.dart';
@@ -24,6 +25,7 @@ void main(List<String> arguments) {
   runner.addCommand(RepairCommand(database));
   runner.addCommand(SwitchCommand(database));
   runner.addCommand(RearrangeCommand(database));
+  runner.addCommand(ExportCommand(database));
   runner.run(arguments);
   database.save();
 }
