@@ -41,7 +41,7 @@ class _GalleryPhotoPageState extends State<GalleryPhotoPage> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
-    final titleText = widget.text ?? 'GALLERY';
+    final titleText = widget.text ?? Strings.galleryPageTitle;
 
     //Builds ui depending on a future variable
     return FutureBuilder<PhotoRepository>(
@@ -65,7 +65,7 @@ class _GalleryPhotoPageState extends State<GalleryPhotoPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TitleText(text: Strings.galleryPageTitle),
+                        TitleText(text: titleText),
                         FilterSearchButton(text: Strings.filterSearch),
                       ],
                     ),
