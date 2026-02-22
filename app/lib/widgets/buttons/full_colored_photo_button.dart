@@ -18,7 +18,7 @@ class FullColoredPhotoButton extends StatelessWidget {
         Navigator.push(
           context,
           PageRouteBuilder(
-            pageBuilder: (_, _, _) => GalleryPhotoPage(),
+            pageBuilder: (_, _, _) => GalleryPhotoPage(category: null),
             transitionDuration: const Duration(milliseconds: 0),
             reverseTransitionDuration: Duration(milliseconds: 0),
             transitionsBuilder: (_,animation,_,child){

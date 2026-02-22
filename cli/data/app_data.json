@@ -11,10 +11,7 @@
 			"order": 1,
 			"name": "dummy.jpg",
 			"route": "assets\\images\\dummy.jpg",
-			"categories": [
-				"Vasconcelos",
-				"Wildlife"
-			]
+			"categories": []
 		},
 		"eaf9eff9-42c6-49ca-bebb-d19dcdac4ffb": {
 			"id": "eaf9eff9-42c6-49ca-bebb-d19dcdac4ffb",
@@ -22,7 +19,6 @@
 			"name": "IMG_1781.jpg",
 			"route": "assets\\images\\IMG_1781.jpg",
 			"categories": [
-				"Vasconcelos",
 				"Wildlife"
 			]
 		},
@@ -32,8 +28,7 @@
 			"name": "IMG_0790.jpg",
 			"route": "assets\\images\\IMG_0790.jpg",
 			"categories": [
-				"Vasconcelos",
-				"Wildlife"
+				"Veracruz"
 			]
 		},
 		"8060fffd-8759-479e-a724-e3520b59ef7f": {
@@ -42,8 +37,7 @@
 			"name": "IMG_0775.jpg",
 			"route": "assets\\images\\IMG_0775.jpg",
 			"categories": [
-				"Vasconcelos",
-				"Wildlife"
+				"Veracruz"
 			]
 		},
 		"b90d5223-6930-48ae-8870-6c579a5bf7cc": {
@@ -52,8 +46,7 @@
 			"name": "IMG_1661.jpg",
 			"route": "assets\\images\\IMG_1661.jpg",
 			"categories": [
-				"Vasconcelos",
-				"Wildlife"
+				"Vasconcelos"
 			]
 		}
 	},

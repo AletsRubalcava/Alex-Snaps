@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:alex_snaps/widgets/photo_display.dart';
 import 'package:alex_snaps/app_content/strings.dart';
 import 'package:alex_snaps/photo_repository.dart';
+import 'package:shared/photo_class.dart';
 
 class GalleryPhotoPage extends StatefulWidget {
-  const GalleryPhotoPage({super.key});
+  const GalleryPhotoPage({required this.category, super.key});
+
+  final String? category;
 
   @override
   State<GalleryPhotoPage> createState() => _GalleryPhotoPageState();
@@ -15,6 +18,7 @@ class GalleryPhotoPage extends StatefulWidget {
 }
 
 class _GalleryPhotoPageState extends State<GalleryPhotoPage> {
+  //Since loadDatabase() is async, we need to use a future.
   late Future<PhotoRepository> pr;
 
   @override
@@ -23,10 +27,10 @@ class _GalleryPhotoPageState extends State<GalleryPhotoPage> {
     pr = loadDatabase();
   }
 
+  //Since load() is async, loadDatabase() is also async.
   Future<PhotoRepository> loadDatabase() async{
     final db = PhotoRepository();
     await db.load();
-    print(db.photos.length);
     return db;
   }
 
@@ -36,10 +40,13 @@ class _GalleryPhotoPageState extends State<GalleryPhotoPage> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
+    //Builds ui depending on a future variable
     return FutureBuilder<PhotoRepository>(
       future: pr,
+      //Snapshot is the state of the future
       builder: (context, snapshot){
 
+        //If future is not done yet
         if(snapshot.connectionState == ConnectionState.waiting){
           return const Scaffold(
             backgroundColor: Color(0xFF2D2D2D),
@@ -49,6 +56,7 @@ class _GalleryPhotoPageState extends State<GalleryPhotoPage> {
           );
         }
 
+        //If future has an error
         if(snapshot.hasError){
           return Scaffold(
             backgroundColor: const Color(0xFF2D2D2D),
@@ -60,9 +68,17 @@ class _GalleryPhotoPageState extends State<GalleryPhotoPage> {
             ),
           );
         }
+
         final db = snapshot.data!;
-        final photo = db.photos.values.toList();
-        photo.sort((a, b) => a.order.compareTo(b.order));
+        late final List<Photo> photo;
+
+        if(widget.category != null){
+          photo = db.photos.values.where((photo) => photo.categories.contains(widget.category)).toList();
+        }else{
+          photo = db.photos.values.toList();
+          photo.sort((a, b) => a.order.compareTo(b.order));
+        }
+
         final photos = photo.map((photo) => photo.route).toList();
 
         return Scaffold(

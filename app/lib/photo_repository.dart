@@ -8,6 +8,7 @@ class PhotoRepository {
   final Map<String, Thumbnail> thumbs = {};
 
   Future<void> load() async {
+    //Looks for the file in the rootBundle (flutter files)
     final content = await rootBundle.loadString('assets/read_only_app_data.json');
 
     Map<String, dynamic> data;
@@ -20,6 +21,7 @@ class PhotoRepository {
     }
 
     //If json is empty
+    //Trim deletes spaces before and after the document.
     if (content.trim().isEmpty) {
       return;
     }

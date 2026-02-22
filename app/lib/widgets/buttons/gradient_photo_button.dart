@@ -6,11 +6,13 @@ class GradientPhotoButton extends StatelessWidget {
   const GradientPhotoButton({
     required this.photo,
     required this.text,
+    this.category,
     super.key,
   });
 
   final String photo;
   final String text;
+  final String? category;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class GradientPhotoButton extends StatelessWidget {
         Navigator.push(
           context,
           PageRouteBuilder(
-            pageBuilder: (_, _, _) => GalleryPhotoPage(),
+            pageBuilder: (_, _, _) => GalleryPhotoPage(category: category),
             transitionDuration: const Duration(milliseconds: 0),
             reverseTransitionDuration: const Duration(milliseconds: 0)
           )

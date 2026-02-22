@@ -3,7 +3,7 @@ import 'package:alex_snaps/general/header.dart';
 import 'package:alex_snaps/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:alex_snaps/about_me/about_me_page.dart';
-import 'gallery/main_gallery_page_list_view.dart';
+import 'gallery/main_gallery_page.dart';
 
 class HorizontalScroll extends StatefulWidget {
   const HorizontalScroll({

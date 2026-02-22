@@ -19,6 +19,7 @@ class HomeRowButtons extends StatelessWidget {
             child: GradientPhotoButton(
               photo: Assets.images.leftRowHomeButton,
               text: Strings.leftHomeRowButton,
+              category: 'Vasconcelos',
             ),
           ),
         ),
@@ -28,6 +29,7 @@ class HomeRowButtons extends StatelessWidget {
             child: GradientPhotoButton(
               photo: Assets.images.middleRowHomeButton,
               text: Strings.middleHomeRowButton,
+              category: 'Wildlife',
             ),
           ),
         ),
@@ -37,6 +39,7 @@ class HomeRowButtons extends StatelessWidget {
             child: GradientPhotoButton(
               photo: Assets.images.rightRowHomeButton,
               text: Strings.rightHomeRowButton,
+              category: 'Veracruz',
             ),
           ),
         ),
