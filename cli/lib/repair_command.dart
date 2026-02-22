@@ -43,7 +43,7 @@ class RepairCommand extends Command {
     for (final img in photoFiles) {
       final fileName = img.uri.pathSegments.last;
       //If the file does not exist in the database
-      if (database.fileNameMap[fileName] == null) {
+      if (database.photoFileNameMap[fileName] == null) {
         database.addPhoto(img, false);
         photoCount++;
       }
@@ -52,7 +52,7 @@ class RepairCommand extends Command {
     for (final img in thumbFiles) {
       final fileName = img.uri.pathSegments.last;
       //If the file does not exist in the database
-      if (database.fileNameMap[fileName] == null) {
+      if (database.thumbFileNameMap[fileName] == null) {
         database.addPhoto(img, true);
         thumbCount++;
       }
@@ -62,11 +62,11 @@ class RepairCommand extends Command {
 
   void _removeOrphanDatabaseEntries() {
     //Copies the map to avoid modifying the original
-    final orphanedPhotos = _findOrphans(database.photos, database.imageDir);
+    final orphanedPhotos = _findOrphans(database.photos, database.imageDir, false);
     //Removes the orphaned photos from the database
     database.photos.removeWhere((id, photo) => orphanedPhotos.containsKey(id));
 
-    final orphanedThumbs = _findOrphans(database.thumbs, database.thumbDir);
+    final orphanedThumbs = _findOrphans(database.thumbs, database.thumbDir, true);
     database.thumbs.removeWhere((id, photo) => orphanedThumbs.containsKey(id));
     print(
       'Removed ${orphanedPhotos.length} photos and ${orphanedThumbs.length} thumbs.',
@@ -75,15 +75,17 @@ class RepairCommand extends Command {
 
   Map<String, Picture> _findOrphans(
     Map<String, Picture> originalMap,
-    Directory directory,
+    Directory directory, bool thumb,
   ) {
     //Copies the map to avoid modifying the original
     final potentialOrphans = Map<String, Picture>.from(originalMap);
     final imageFiles = directory.listSync().whereType<File>();
 
+    final fileNameMap = thumb ? database.thumbFileNameMap : database.photoFileNameMap;
+
     for (final img in imageFiles) {
       final fileName = img.uri.pathSegments.last;
-      final objectId = database.fileNameMap[fileName];
+      final objectId = fileNameMap[fileName];
       if (objectId != null) {
         //Removes the objectId from the potential orphans
         potentialOrphans.remove(objectId);

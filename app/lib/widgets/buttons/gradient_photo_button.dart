@@ -35,8 +35,6 @@ class GradientPhotoButton extends StatelessWidget {
               child: Image.asset(
                 photo,
                 fit: BoxFit.cover,
-                cacheWidth: 1100,
-                cacheHeight: 1425,
               ),
             ),
             Align(

@@ -61,7 +61,7 @@ class SwitchCommand extends Command {
     if (order != null) {
       photoId = database.orderMap[order];
     } else {
-      photoId = database.fileNameMap[value];
+      photoId = database.photoFileNameMap[value];
     }
     if (photoId == null) return null;
     return database.photos[photoId];

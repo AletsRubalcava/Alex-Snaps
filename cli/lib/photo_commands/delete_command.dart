@@ -32,7 +32,13 @@ class DeleteCommand extends Command {
     final fileName = results.first;
     final thumb = argResults!['thumb'] as bool;
 
-    String? id = database.fileNameMap[fileName];
+    final String? id;
+
+    if(thumb){
+      id = database.thumbFileNameMap[fileName];
+    }else{
+      id = database.photoFileNameMap[fileName];
+    }
 
     if (id == null) {
       print("File not found.");

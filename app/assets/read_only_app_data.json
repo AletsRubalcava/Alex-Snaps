@@ -3,22 +3,27 @@
 		"9c63c119-faf4-4211-b58b-01236a034005": {
 			"id": "9c63c119-faf4-4211-b58b-01236a034005",
 			"name": "Vasconcelos",
-			"thumb": "60f0f9c7-c5ea-41b3-8ebc-3cc0fdaf077e"
+			"thumb": "d86d4c24-66dc-4c02-83d8-20f039887089"
 		},
 		"7fb81b77-ef45-4f66-9668-b795ae2fb31e": {
 			"id": "7fb81b77-ef45-4f66-9668-b795ae2fb31e",
 			"name": "Wildlife",
-			"thumb": "439f931a-6e83-474c-ac94-34220514141f"
+			"thumb": "d86d4c24-66dc-4c02-83d8-20f039887089"
 		},
 		"12e6789e-bc87-4bb1-a1f8-f3c3553979a4": {
 			"id": "12e6789e-bc87-4bb1-a1f8-f3c3553979a4",
 			"name": "Veracruz",
-			"thumb": "aac39767-f09e-4d32-9980-5f4e0aa3a8fb"
+			"thumb": "d86d4c24-66dc-4c02-83d8-20f039887089"
 		},
 		"ad40814f-8ffe-4786-b45e-647608347b0d": {
 			"id": "ad40814f-8ffe-4786-b45e-647608347b0d",
 			"name": "Valquirico",
-			"thumb": "6671daf4-94c7-4c2a-a832-a33d81a7e78d"
+			"thumb": "d86d4c24-66dc-4c02-83d8-20f039887089"
+		},
+		"441ce8b5-100e-431f-997d-bc02f48d204e": {
+			"id": "441ce8b5-100e-431f-997d-bc02f48d204e",
+			"name": "Vault",
+			"thumb": "d86d4c24-66dc-4c02-83d8-20f039887089"
 		}
 	},
 	"photos": {
@@ -101,6 +106,18 @@
 			"id": "6671daf4-94c7-4c2a-a832-a33d81a7e78d",
 			"name": "thumb_IMG_0612.jpg",
 			"route": "assets\\images\\thumbs\\thumb_IMG_0612.jpg",
+			"categories": []
+		},
+		"ee99b95d-43a4-4a36-a379-6f38ee50659b": {
+			"id": "ee99b95d-43a4-4a36-a379-6f38ee50659b",
+			"name": "thumb_IMG_0562.jpg",
+			"route": "assets\\images\\thumbs\\thumb_IMG_0562.jpg",
+			"categories": []
+		},
+		"d86d4c24-66dc-4c02-83d8-20f039887089": {
+			"id": "d86d4c24-66dc-4c02-83d8-20f039887089",
+			"name": "thumb_dummy.jpg",
+			"route": "assets\\images\\thumbs\\thumb_dummy.jpg",
 			"categories": []
 		}
 	},

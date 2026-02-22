@@ -55,7 +55,12 @@ class AddCommand extends Command {
 
     for (final file in imageFiles) {
       final fileName = file.uri.pathSegments.last;
-      final id = database.fileNameMap[fileName];
+      final String? id;
+      if(thumb){
+        id = database.thumbFileNameMap[fileName];
+      }else{
+        id = database.photoFileNameMap[fileName];
+      }
       if (id == null) {
         final photoId = database.addPhoto(file,thumb);
         if(categories.isNotEmpty) _addCategories(photoId, categories, thumb);
@@ -69,7 +74,13 @@ class AddCommand extends Command {
 
   void _singleImport(String fileName, List<String> categories){
     final thumb = argResults!['thumb'] as bool;
-    final String? existingId = database.fileNameMap[fileName];
+    final String? existingId;
+
+    if(thumb){
+      existingId = database.thumbFileNameMap[fileName];
+    }else{
+      existingId = database.photoFileNameMap[fileName];
+    }
 
     if (existingId != null) {
       if (categories.isNotEmpty) {

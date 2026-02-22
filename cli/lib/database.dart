@@ -18,7 +18,8 @@ class Database {
   final Map<String, Category> categories = {};
   final Map<String, Photo> photos = {};
   final Map<String, Thumbnail> thumbs = {};
-  final Map<String, String> fileNameMap = {};
+  final Map<String, String> photoFileNameMap = {};
+  final Map<String, String> thumbFileNameMap = {};
   final Map<int, String> orderMap = {};
   int maxOrder = 0;
 
@@ -148,7 +149,7 @@ class Database {
       print('Category: "$categoryName" already exist.');
       return null;
     }
-    final thumbId = fileNameMap[thumbName];
+    final thumbId = thumbFileNameMap[thumbName];
 
     if (thumbId == null) {
       print('Thumb: "$thumbName" does not exist.');
@@ -168,9 +169,11 @@ class Database {
   }
 
   void updateFileNameMap() {
-    fileNameMap
+    photoFileNameMap
       ..clear()
-      ..addEntries(photos.values.map((p) => MapEntry(p.name, p.id)))
+      ..addEntries(photos.values.map((p) => MapEntry(p.name, p.id)));
+    thumbFileNameMap
+      ..clear()
       ..addEntries(thumbs.values.map((p) => MapEntry(p.name, p.id)));
   }
 
@@ -184,8 +187,7 @@ class Database {
   String addPhoto(File file, bool thumb) {
     final fileName = file.uri.pathSegments.last;
 
-    // ignore: prefer_typing_uninitialized_variables
-    late final picture;
+    final dynamic picture;
 
     if (thumb) {
       picture = Thumbnail.createID(fileName);
