@@ -1,11 +1,12 @@
+import 'package:alex_snaps/app_content/assets.dart';
 import 'package:alex_snaps/app_content/strings.dart';
 import 'package:alex_snaps/gallery/filter_search_button.dart';
-import 'package:alex_snaps/general/header.dart';
 import 'package:alex_snaps/general/title_text.dart';
 import 'package:alex_snaps/photo_repository.dart';
 import 'package:alex_snaps/widgets/buttons/full_colored_photo_button.dart';
 import 'package:alex_snaps/widgets/buttons/gradient_photo_button.dart';
 import 'package:flutter/material.dart';
+import 'package:shared/category_class.dart';
 
 class MainGalleryPageListView extends StatefulWidget {
   const MainGalleryPageListView({super.key});
@@ -40,8 +41,7 @@ class _MainGalleryPageListView extends State<MainGalleryPageListView> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            backgroundColor: Color(0xFF2D2D2D),
-            appBar: Header(),
+            backgroundColor: Color(0xFFFF0000),
             body: SafeArea(
               child: Padding(
                 padding: EdgeInsetsGeometry.only(
@@ -76,7 +76,14 @@ class _MainGalleryPageListView extends State<MainGalleryPageListView> {
         }
 
         final db = snapshot.data!;
-        final buttons = db.categories.values.toList();
+        final tmpButtons = db.categories.values.toList();
+        final List<Category> buttons;
+
+        if (tmpButtons.length % 2 != 0) {
+          buttons = tmpButtons.sublist(0, tmpButtons.length - 1);
+        } else {
+          buttons = tmpButtons;
+        }
 
         return Scaffold(
           backgroundColor: Color(0xFF2D2D2D),
@@ -109,6 +116,7 @@ class _MainGalleryPageListView extends State<MainGalleryPageListView> {
                   sliver: SliverToBoxAdapter(
                     child: FullColoredPhotoButton(
                       text: Strings.mainGalleryButton,
+                      photo: Assets.images.mainGalleryButton,
                     ),
                   ),
                 ),
@@ -135,6 +143,22 @@ class _MainGalleryPageListView extends State<MainGalleryPageListView> {
                     ),
                   ),
                 ),
+                if (tmpButtons.length % 2 != 0) ...[
+                  SliverPadding(
+                    padding: EdgeInsetsGeometry.only(
+                      bottom: height * 0.02,
+                      left: width * 0.08,
+                      right: width * 0.08,
+                    ),
+                    sliver: SliverToBoxAdapter(
+                      child: FullColoredPhotoButton(
+                        text: tmpButtons.last.name.toUpperCase(),
+                        photo: db.thumbs[tmpButtons.last.thumbId]!.route,
+                        category: tmpButtons.last.name,
+                      ),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
