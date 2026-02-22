@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 
 class BottomNavButton extends StatelessWidget {
-  BottomNavButton({
+  const BottomNavButton({
     required this.icon,
     required this.iconSize,
     required this.onNavigate,
@@ -12,7 +12,7 @@ class BottomNavButton extends StatelessWidget {
 
   final String icon;
   final double iconSize;
-  Function(int) onNavigate;
+  final Function(int) onNavigate;
   final int pageIndex;
 
   @override

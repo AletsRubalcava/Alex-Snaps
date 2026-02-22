@@ -3,10 +3,10 @@ import 'package:alex_snaps/app_content/assets.dart';
 import 'package:alex_snaps/widgets/buttons/bottom_nav_button.dart';
 
 class BottomNavBar extends StatefulWidget {
-  BottomNavBar({required this.onNavigate, required this.currentPage, super.key});
+  const BottomNavBar({required this.onNavigate, required this.currentPage, super.key});
 
   final int currentPage;
-  Function(int) onNavigate;
+  final Function(int) onNavigate;
 
   @override
   State<BottomNavBar> createState() => _BottomNavBar();

@@ -4,7 +4,6 @@ import 'package:alex_snaps/general/title_text.dart';
 import 'package:alex_snaps/widgets/buttons/full_colored_photo_button.dart';
 import 'package:alex_snaps/widgets/buttons/gradient_photo_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class MainGalleryPageListView extends StatelessWidget {
   const MainGalleryPageListView({super.key});
@@ -20,10 +19,16 @@ class MainGalleryPageListView extends StatelessWidget {
       'assets/images/dummy.jpg',
     ];
 
-    final cat = [
+    final name = [
       'VASCONCELOS',
       'WILDLIFE',
       'VERACRUZ',
+    ];
+
+    final cat = [
+      'Vasconcelos',
+      'Wildlife',
+      'Veracruz'
     ];
 
     return Scaffold(
@@ -64,7 +69,7 @@ class MainGalleryPageListView extends StatelessWidget {
               ),
               sliver: SliverGrid(
                 delegate: SliverChildBuilderDelegate(
-                      (context, index) => GradientPhotoButton(photo: photo[index], text: cat[index]),
+                      (context, index) => GradientPhotoButton(photo: photo[index], text: name[index], category: cat[index]),
                   childCount: photo.length,
                 ),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
