@@ -11,7 +11,13 @@ class DeleteCommand extends Command {
 
   Database database;
 
-  DeleteCommand(this.database);
+  DeleteCommand(this.database){
+    argParser.addFlag(
+        'thumb',
+        abbr: 't',
+        help: 'Marks the photo as a thumbnail.'
+    );
+  }
 
   @override
   void run() {
@@ -24,6 +30,7 @@ class DeleteCommand extends Command {
     }
 
     final fileName = results.first;
+    final thumb = argResults!['thumb'] as bool;
 
     String? id = database.fileNameMap[fileName];
 
@@ -41,9 +48,7 @@ class DeleteCommand extends Command {
       }
       return;
     }
-    database.removePhoto(id);
-    print('Photo deleted successfully!');
-
+    database.removePhoto(id, thumb);
     database.save();
   }
 }

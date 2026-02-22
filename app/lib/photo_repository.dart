@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:shared/photo_class.dart';
+import 'package:shared/category_class.dart';
+
 
 class PhotoRepository {
-  final Set<String> categories = {};
+  final Map<String,Category> categories = {};
   final Map<String, Photo> photos = {};
   final Map<String, Thumbnail> thumbs = {};
 
@@ -26,11 +28,14 @@ class PhotoRepository {
       return;
     }
 
-    //Extract map 'data' in 'categories and photos as a list of type dynamic
-    final categoryList = (data['categories'] as List<dynamic>?) ?? [];
+    final categoryJson = (data['categories'] as Map<String, dynamic>?) ?? {};
     categories.clear();
-    //Turns every element of the list, and turns it into a string.
-    categories.addAll(categoryList.map((category) => category.toString()));
+    //Creates a map from a set of map entries
+    categories.addAll(
+      categoryJson.map((id, categoryData) {
+        return MapEntry(id, Category.decode(categoryData as Map<String, dynamic>));
+      }),
+    );
 
     final photosJson = (data['photos'] as Map<String, dynamic>?) ?? {};
     photos.clear();

@@ -1,5 +1,6 @@
 import 'package:args/command_runner.dart';
 import 'package:cli/database.dart';
+import 'package:shared/category_class.dart';
 
 class CategoryListCommand extends Command {
   @override
@@ -21,7 +22,7 @@ class CategoryListCommand extends Command {
       return;
     }
 
-    Set<String> categories = database.getCategories();
+    Map<String, Category> categories = database.getCategories();
 
     if (categories.isEmpty) {
       print('No active categories.');
@@ -29,9 +30,9 @@ class CategoryListCommand extends Command {
     }
 
     print('Active categories:');
-    for (final category in categories) {
-      print(category);
-    }
+    categories.forEach((id, category) {
+      print(category.name);
+    });
     database.save();
   }
 }

@@ -14,22 +14,23 @@ class CategoryCreateCommand extends Command {
 
   @override
   void run() {
-    final categories = argResults!.rest;
+    final results = argResults!.rest;
 
-    if (categories.isEmpty) {
-      print('Value(s) not introduced.');
+    if (results.length != 2) {
+      print('This command only accepts two arguments');
       printUsage();
       return;
     }
 
-    for(String cat in categories){
-      if (database.categories.contains(cat)) {
-        print('Category: "$cat" already exist.');
-        continue;
-      }
-      database.addCategory(cat);
-      print('Category $cat added!');
+    final category = results.first;
+    final thumbName = results.last;
+
+    final id = database.addCategory(category, thumbName);
+
+    if(id == null){
+      return;
     }
+    print('Category $category added!');
     database.save();
   }
 }

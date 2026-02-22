@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:shared/photo_class.dart';
+import 'package:shared/category_class.dart';
 import 'package:path/path.dart' as path;
 
 class Database {
@@ -14,7 +15,7 @@ class Database {
     path.join(projectRoot, 'cli', 'data', 'app_data.json'),
   );
 
-  final Set<String> categories = {};
+  final Map<String, Category> categories = {};
   final Map<String, Photo> photos = {};
   final Map<String, Thumbnail> thumbs = {};
   final Map<String, String> fileNameMap = {};
@@ -76,10 +77,14 @@ class Database {
     }
 
     //Extract map 'data' in 'categories and photos as a list of type dynamic
-    final categoryList = (data['categories'] as List<dynamic>?) ?? [];
+    final categoryJson = (data['categories'] as Map<String, dynamic>?) ?? {};
     categories.clear();
-    //Turns every element of the list, and turns it into a string.
-    categories.addAll(categoryList.map((category) => category.toString()));
+    //Creates a map from a set of map entries
+    categories.addAll(
+      categoryJson.map((id, categoryData) {
+        return MapEntry(id, Category.decode(categoryData as Map<String, dynamic>));
+      }),
+    );
 
     final photosJson = (data['photos'] as Map<String, dynamic>?) ?? {};
     photos.clear();
@@ -126,7 +131,7 @@ class Database {
     final invalid = <String>[];
 
     for (final cat in cats) {
-      if (categories.contains(cat)) {
+      if (categories[cat] != null) {
         valid.add(cat);
       } else {
         invalid.add(cat);
@@ -138,15 +143,27 @@ class Database {
     return valid;
   }
 
-  void addCategory(String category) {
-    categories.add(category);
+  String? addCategory(String categoryName, String thumbName) {
+    if (categories[categoryName] != null) {
+      print('Category: "$categoryName" already exist.');
+      return null;
+    }
+    final thumbId = fileNameMap[thumbName];
+
+    if (thumbId == null) {
+      print('Thumb: "$thumbName" does not exist.');
+      return null;
+    }
+    final cat = Category.createId(categoryName, thumbId);
+    categories[cat.id] = cat;
+    return cat.id;
   }
 
   void removeCategory(String category) {
     categories.remove(category);
   }
 
-  Set<String> getCategories() {
+  Map<String, Category> getCategories() {
     return categories;
   }
 
@@ -183,6 +200,7 @@ class Database {
 
   void movePhoto(String fileRoute, String destinyPath) {
     final file = File(fileRoute);
+    destinyPath = path.join('app', destinyPath);
     final finalPath = path.isAbsolute(destinyPath)
         ? destinyPath
         : path.join(projectRoot, destinyPath);
@@ -194,23 +212,35 @@ class Database {
     }
   }
 
-  void removePhoto(String id) {
-    final photo = photos[id];
-    if (photo == null) return;
+  void removePhoto(String id, bool thumb) {
+    final Picture? photo;
 
-    final File? file = lookForFile(photo.name, path.dirname(photo.route));
-    photos.remove(id);
+    if(thumb){
+      photo = thumbs[id];
+    }else{
+      photo = photos[id];
+    }
+
+    if (photo == null) {
+      final msg = thumb ? 'thumb' : 'photo';
+      print('Photo not found as a $msg.');
+      return;
+    }
+    final File? file = lookForFile(photo.name,path.dirname(path.join('app',photo.route)));
+
+    thumb ? thumbs.remove(id) : photos.remove(id);
 
     if (file == null) return;
     file.deleteSync();
+    print('Photo deleted successfully!');
   }
 
   void addCategoryToPhoto(String id, String category, bool thumb) {
     final Picture? picture;
 
-    if(thumb){
+    if (thumb) {
       picture = thumbs[id];
-    }else{
+    } else {
       picture = photos[id];
     }
     if (picture == null) return;
@@ -234,7 +264,9 @@ class Database {
 
   void save() {
     final data = {
-      'categories': categories.toList(),
+      'categories': categories.map(
+        (id, category) => MapEntry(id, category.toJson()),
+      ),
       'photos': photos.map((id, photo) => MapEntry(id, photo.toJson())),
       'thumbs': thumbs.map((id, photo) => MapEntry(id, photo.toJson())),
       'max order': maxOrder,

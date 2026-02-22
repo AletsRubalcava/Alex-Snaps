@@ -49,7 +49,7 @@ class AddCommand extends Command {
     final thumb = argResults!['thumb'] as bool;
 
     final import = Directory(
-      path.join(database.projectRoot, 'data', 'import'),
+      path.join(database.projectRoot, 'cli', 'data', 'import'),
     );
     final imageFiles = import.listSync().whereType<File>();
 
@@ -80,7 +80,7 @@ class AddCommand extends Command {
 
     final File? photoFile = database.lookForFile(
       fileName,
-      path.join('data', 'import'),
+      path.join('cli', 'data', 'import'),
     );
 
     if (photoFile == null) {
