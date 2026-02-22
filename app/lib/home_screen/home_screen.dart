@@ -3,32 +3,12 @@ import 'package:alex_snaps/home_screen/home_row_buttons.dart';
 import 'package:alex_snaps/general/title_text.dart';
 import 'package:alex_snaps/home_screen/main_home_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:alex_snaps/app_content/strings.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({required this.onNavigate, super.key});
 
   final Function(int) onNavigate;
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  _HomeScreenState();
-
-  @override
-  void initState() {
-    super.initState();
-
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarIconBrightness: Brightness.light,
-        statusBarColor: Colors.transparent,
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 secondaryButtonAspectRatio: secondaryButtonAspectRatio,
               ),
               Spacer(),
-              AboutMeButton(width: width, height: height, onNavigate: widget.onNavigate),
+              AboutMeButton(width: width, height: height, onNavigate: onNavigate),
               Spacer(),
             ],
           ),
