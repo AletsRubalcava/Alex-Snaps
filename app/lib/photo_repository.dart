@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:shared/photo_class.dart';
 import 'package:shared/category_class.dart';
 
-
 class PhotoRepository {
   final Map<String,Category> categories = {};
   final Map<String, Photo> photos = {};

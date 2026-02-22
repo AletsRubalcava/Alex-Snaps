@@ -17,21 +17,6 @@ class MainGalleryPageListView extends StatefulWidget {
 }
 
 class _MainGalleryPageListView extends State<MainGalleryPageListView> {
-  late Future<PhotoRepository> pr;
-
-  @override
-  void initState() {
-    super.initState();
-    pr = loadDatabase();
-  }
-
-  //Since load() is async, loadDatabase() is also async.
-  Future<PhotoRepository> loadDatabase() async {
-    final db = PhotoRepository();
-    await db.load();
-    return db;
-  }
-
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
