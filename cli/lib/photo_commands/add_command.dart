@@ -58,10 +58,10 @@ class AddCommand extends Command {
       final id = database.fileNameMap[fileName];
       if (id == null) {
         final photoId = database.addPhoto(file,thumb);
-        if(categories.isNotEmpty) _addCategories(photoId, categories);
+        if(categories.isNotEmpty) _addCategories(photoId, categories, thumb);
         continue;
       }
-      if(categories.isNotEmpty) _addCategories(id, categories);
+      if(categories.isNotEmpty) _addCategories(id, categories, thumb);
     }
     print('Photos added successfully!');
     return;
@@ -73,7 +73,7 @@ class AddCommand extends Command {
 
     if (existingId != null) {
       if (categories.isNotEmpty) {
-        _addCategories(existingId, categories);
+        _addCategories(existingId, categories, thumb);
         return;
       }
     }
@@ -98,13 +98,13 @@ class AddCommand extends Command {
     print('Photo added successfully!');
 
     if (categories.isNotEmpty) {
-      _addCategories(newId, categories);
+      _addCategories(newId, categories, thumb);
     }
   }
 
-  void _addCategories(String id, List<String> categories) {
+  void _addCategories(String id, List<String> categories, bool thumb) {
     for (final cat in categories) {
-      database.addCategoryToPhoto(id, cat);
+      database.addCategoryToPhoto(id, cat, thumb);
     }
   }
 }

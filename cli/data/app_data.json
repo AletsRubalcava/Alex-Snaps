@@ -55,13 +55,17 @@
 			"id": "aac39767-f09e-4d32-9980-5f4e0aa3a8fb",
 			"name": "thumb_IMG_0775.jpg",
 			"route": "assets\\images\\thumbs\\thumb_IMG_0775.jpg",
-			"categories": []
+			"categories": [
+				"Veracruz"
+			]
 		},
 		"439f931a-6e83-474c-ac94-34220514141f": {
 			"id": "439f931a-6e83-474c-ac94-34220514141f",
 			"name": "thumb_IMG_1781.jpg",
 			"route": "assets\\images\\thumbs\\thumb_IMG_1781.jpg",
-			"categories": []
+			"categories": [
+				"Wildlife"
+			]
 		},
 		"89e97b22-91a1-4783-b45c-c3fedb9b4f23": {
 			"id": "89e97b22-91a1-4783-b45c-c3fedb9b4f23",
@@ -73,7 +77,9 @@
 			"id": "60f0f9c7-c5ea-41b3-8ebc-3cc0fdaf077e",
 			"name": "thumb_IMG_1661.jpg",
 			"route": "assets\\images\\thumbs\\thumb_IMG_1661.jpg",
-			"categories": []
+			"categories": [
+				"Vasconcelos"
+			]
 		}
 	},
 	"max order": 5

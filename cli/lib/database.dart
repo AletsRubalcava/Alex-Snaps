@@ -205,12 +205,18 @@ class Database {
     file.deleteSync();
   }
 
-  void addCategoryToPhoto(String id, String category) {
-    final photo = photos[id];
-    if (photo == null) return;
+  void addCategoryToPhoto(String id, String category, bool thumb) {
+    final Picture? picture;
 
-    if (!photo.categories.contains(category)) {
-      photo.categories.add(category);
+    if(thumb){
+      picture = thumbs[id];
+    }else{
+      picture = photos[id];
+    }
+    if (picture == null) return;
+
+    if (!picture.categories.contains(category)) {
+      picture.categories.add(category);
     }
   }
 
