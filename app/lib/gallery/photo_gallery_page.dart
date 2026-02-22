@@ -8,8 +8,9 @@ import 'package:alex_snaps/photo_repository.dart';
 import 'package:shared/photo_class.dart';
 
 class GalleryPhotoPage extends StatefulWidget {
-  const GalleryPhotoPage({required this.category, super.key});
+  const GalleryPhotoPage({required this.category, this.text, super.key});
 
+  final String? text;
   final String? category;
 
   @override
@@ -40,6 +41,8 @@ class _GalleryPhotoPageState extends State<GalleryPhotoPage> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
+    final titleText = widget.text ?? 'GALLERY';
+
     //Builds ui depending on a future variable
     return FutureBuilder<PhotoRepository>(
       future: pr,
@@ -48,11 +51,26 @@ class _GalleryPhotoPageState extends State<GalleryPhotoPage> {
 
         //If future is not done yet
         if(snapshot.connectionState == ConnectionState.waiting){
-          return const Scaffold(
+          return Scaffold(
             backgroundColor: Color(0xFF2D2D2D),
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
+              appBar: Header(),
+              body: SafeArea(
+                child: Padding(
+                  padding: EdgeInsetsGeometry.only(
+                    top: height * 0.01,
+                    bottom: height * 0.02,
+                    left: width * 0.08,
+                    right: width * 0.08,
+                  ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TitleText(text: Strings.galleryPageTitle),
+                        FilterSearchButton(text: Strings.filterSearch),
+                      ],
+                    ),
+                ),
+              )
           );
         }
 
@@ -89,6 +107,7 @@ class _GalleryPhotoPageState extends State<GalleryPhotoPage> {
               slivers: [
                 SliverPadding(
                   padding: EdgeInsetsGeometry.only(
+                    top: height * 0.01,
                     bottom: height * 0.02,
                     left: width * 0.08,
                     right: width * 0.08,
@@ -97,7 +116,7 @@ class _GalleryPhotoPageState extends State<GalleryPhotoPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TitleText(text: Strings.galleryPageTitle),
+                        TitleText(text: titleText),
                         FilterSearchButton(text: Strings.filterSearch),
                       ],
                     ),

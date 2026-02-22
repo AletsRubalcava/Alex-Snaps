@@ -1,4 +1,4 @@
-import 'package:alex_snaps/gallery/gallery_photo_page.dart';
+import 'package:alex_snaps/gallery/photo_gallery_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,7 +21,7 @@ class GradientPhotoButton extends StatelessWidget {
         Navigator.push(
           context,
           PageRouteBuilder(
-            pageBuilder: (_, _, _) => GalleryPhotoPage(category: category),
+            pageBuilder: (_, _, _) => GalleryPhotoPage(text: text, category: category),
             transitionDuration: const Duration(milliseconds: 0),
             reverseTransitionDuration: const Duration(milliseconds: 0)
           )

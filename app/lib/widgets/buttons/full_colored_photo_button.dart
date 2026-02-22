@@ -2,7 +2,7 @@ import 'package:alex_snaps/app_content/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:alex_snaps/app_content/assets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:alex_snaps/gallery/gallery_photo_page.dart';
+import 'package:alex_snaps/gallery/photo_gallery_page.dart';
 
 class FullColoredPhotoButton extends StatelessWidget {
   const FullColoredPhotoButton({required this.text, super.key});
