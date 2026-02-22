@@ -1,6 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:path/path.dart' as path;
+import 'package:flutter/services.dart';
 import 'package:shared/photo_class.dart';
 
 class PhotoRepository {
@@ -8,42 +7,8 @@ class PhotoRepository {
   final Map<String, Photo> photos = {};
   final Map<String, Thumbnail> thumbs = {};
 
-  late final dataFile = File(
-    path.join('app', 'assets', 'read_only_app_data.json'),
-  );
-
-  void load() {
-    lookForEssentialDirectories();
-    fillRepository();
-  }
-
-  void lookForEssentialDirectories() {
-    final directories = [
-      path.join('app', 'assets', 'icons'),
-      path.join('app', 'assets', 'images', 'thumbs'),
-    ];
-
-    for (final dir in directories) {
-      final directory = Directory(path.join(dir));
-      if (!directory.existsSync()) {
-        _repairDirectory(dir);
-      }
-    }
-  }
-
-  void _repairDirectory(String directory) {
-    final dir = Directory(path.join(directory));
-    dir.createSync(recursive: true);
-  }
-
-  void fillRepository() {
-    if (!dataFile.existsSync()) {
-      dataFile.createSync();
-      return;
-    }
-
-    //Converts the JSON into a string
-    final content = dataFile.readAsStringSync();
+  Future<void> load() async {
+    final content = await rootBundle.loadString('assets/read_only_app_data.json');
 
     Map<String, dynamic> data;
     //Verify json is valid or not corrupted.

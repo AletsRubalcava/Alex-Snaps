@@ -37,14 +37,14 @@ class Thumbnail extends Picture {
     }else{
        thumbName = 'thumb_$originalImageName';
     }
-    final route = path.join('app', 'assets', 'images','thumbs', thumbName);
+    final route = path.join('assets', 'images','thumbs', thumbName);
     return Thumbnail(id: id, name: thumbName, route: route, categories: []);
   }
 
   factory Thumbnail.decode(dynamic thumb){
         final thumbId = thumb['id'] as String;
         final name = thumb['name'] as String;
-        final newRoute = path.join('app','assets','images','thumbs',name);
+        final newRoute = path.join('assets','images','thumbs',name);
         //To every element in categories, converts it into the expected type
         final photoCategories = (thumb['categories'] as List<dynamic>)
             .map((cat) => cat.toString())
@@ -80,7 +80,7 @@ class Photo extends Picture {
     final uuid = Uuid();
 
     final id = uuid.v4();
-    final route = path.join('app', 'assets', 'images', imageName);
+    final route = path.join('assets', 'images', imageName);
     return Photo(
       id: id,
       order: photoOrder,
@@ -94,7 +94,7 @@ class Photo extends Picture {
         final photoId = photo['id'] as String;
         final order = photo['order'] as int;
         final name = photo['name'] as String;
-        final newRoute = path.join('app','assets','images',name);
+        final newRoute = path.join('assets','images',name);
         //To every element in categories, converts it into the expected type
         final photoCategories = (photo['categories'] as List<dynamic>)
             .map((cat) => cat.toString())
