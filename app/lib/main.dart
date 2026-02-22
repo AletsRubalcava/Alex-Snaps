@@ -1,15 +1,25 @@
+import 'package:alex_snaps/photo_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'landing_page/vertical_scroll.dart';
 import 'package:flutter/services.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
 
+  final repo = PhotoRepository();
+  await repo.load();
+
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
 
-  runApp(const MyApp());
+  runApp(
+      Provider<PhotoRepository>.value(
+        value: repo,
+        child: const MyApp(),
+      ),
+  );
 }
 
 class MyApp extends StatefulWidget {

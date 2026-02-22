@@ -6,6 +6,7 @@ import 'package:alex_snaps/photo_repository.dart';
 import 'package:alex_snaps/widgets/buttons/full_colored_photo_button.dart';
 import 'package:alex_snaps/widgets/buttons/gradient_photo_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared/category_class.dart';
 
 class MainGalleryPageListView extends StatefulWidget {
@@ -36,56 +37,17 @@ class _MainGalleryPageListView extends State<MainGalleryPageListView> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
-    return FutureBuilder(
-      future: pr,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Scaffold(
-            backgroundColor: Color(0xFFFF0000),
-            body: SafeArea(
-              child: Padding(
-                padding: EdgeInsetsGeometry.only(
-                  top: height * 0.01,
-                  bottom: height * 0.02,
-                  left: width * 0.08,
-                  right: width * 0.08,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TitleText(text: Strings.galleryPageTitle),
-                    FilterSearchButton(text: Strings.filterSearch),
-                  ],
-                ),
-              ),
-            ),
-          );
-        }
+    final db = context.read<PhotoRepository>();
+    final tmpButtons = db.categories.values.toList();
+    final List<Category> buttons;
 
-        //If future has an error
-        if (snapshot.hasError) {
-          return Scaffold(
-            backgroundColor: const Color(0xFF2D2D2D),
-            body: Center(
-              child: Text(
-                'Error loading database',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          );
-        }
+    if (tmpButtons.length % 2 != 0) {
+      buttons = tmpButtons.sublist(0, tmpButtons.length - 1);
+    } else {
+      buttons = tmpButtons;
+    }
 
-        final db = snapshot.data!;
-        final tmpButtons = db.categories.values.toList();
-        final List<Category> buttons;
-
-        if (tmpButtons.length % 2 != 0) {
-          buttons = tmpButtons.sublist(0, tmpButtons.length - 1);
-        } else {
-          buttons = tmpButtons;
-        }
-
-        return Scaffold(
+    return Scaffold(
           backgroundColor: Color(0xFF2D2D2D),
           body: SafeArea(
             child: CustomScrollView(
@@ -163,7 +125,5 @@ class _MainGalleryPageListView extends State<MainGalleryPageListView> {
             ),
           ),
         );
-      },
-    );
   }
 }
