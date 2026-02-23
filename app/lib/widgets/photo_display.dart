@@ -1,3 +1,4 @@
+import 'package:alex_snaps/widgets/show_image_dialog.dart';
 import 'package:flutter/cupertino.dart';
 
 class PhotoDisplay extends StatelessWidget{
@@ -7,11 +8,16 @@ class PhotoDisplay extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: (){
+        showImageDialog(context, photo);
+      },
+      child: Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadiusGeometry.circular(5),
         image: DecorationImage(image: AssetImage(photo), fit: BoxFit.cover),
       ),
+      )
     );
   }
 }

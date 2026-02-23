@@ -15,6 +15,7 @@ class MainHomeButton extends StatelessWidget {
       child: GradientPhotoButton(
         photo: Assets.images.mainHomeButton,
         text: Strings.mainHomeButton,
+        galleryText: Strings.mainGalleryButton,
       ),
     );
   }
