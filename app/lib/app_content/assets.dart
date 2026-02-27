@@ -6,6 +6,7 @@ class Assets {
 class AppIcons{
   final String arrowDownCircle = 'assets/icons/arrow_down_circle.svg';
   final String arrowRightCircle = 'assets/icons/arrow_right_circle.svg';
+  final String arrowLeftCircle = 'assets/icons/arrow_left_circle.svg';
   final String alexSnapsLogo = 'assets/icons/alex_snaps_logo.svg';
 
   final String home = 'assets/icons/home.svg';

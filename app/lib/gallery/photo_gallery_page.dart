@@ -1,6 +1,7 @@
 import 'package:alex_snaps/gallery/filter_search_button.dart';
 import 'package:alex_snaps/general/header.dart';
 import 'package:alex_snaps/general/title_text.dart';
+import 'package:alex_snaps/widgets/buttons/go_back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:alex_snaps/widgets/photo_display.dart';
 import 'package:alex_snaps/app_content/strings.dart';
@@ -43,42 +44,53 @@ class _GalleryPhotoPageState extends State<GalleryPhotoPage> {
       backgroundColor: Color(0xFF2D2D2D),
       appBar: Header(),
       body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverPadding(
-              padding: EdgeInsetsGeometry.only(
-                top: height * 0.01,
-                bottom: height * 0.02,
-                left: width * 0.08,
-                right: width * 0.08,
-              ),
-              sliver: SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TitleText(text: titleText),
-                    FilterSearchButton(text: Strings.filterSearch),
-                  ],
+        child: Stack(
+          children: [
+            CustomScrollView(
+              slivers: [
+                SliverPadding(
+                  padding: EdgeInsetsGeometry.only(
+                    top: height * 0.01,
+                    bottom: height * 0.02,
+                    left: width * 0.08,
+                    right: width * 0.08,
+                  ),
+                  sliver: SliverToBoxAdapter(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TitleText(text: titleText),
+                        FilterSearchButton(text: Strings.filterSearch),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
+                SliverPadding(
+                  padding: EdgeInsetsGeometry.only(
+                    bottom: height * 0.02,
+                    left: width * 0.08,
+                    right: width * 0.08,
+                  ),
+                  sliver: SliverGrid(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) => PhotoDisplay(photo: photos[index]),
+                      childCount: photos.length,
+                    ),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 5,
+                      mainAxisSpacing: 5,
+                      childAspectRatio: 4 / 5,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            SliverPadding(
-              padding: EdgeInsetsGeometry.only(
-                bottom: height * 0.02,
-                left: width * 0.08,
-                right: width * 0.08,
-              ),
-              sliver: SliverGrid(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) => PhotoDisplay(photo: photos[index]),
-                  childCount: photos.length,
-                ),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
-                  childAspectRatio: 4 / 5,
-                ),
+            Padding(
+              padding: EdgeInsets.only(left: width * 0.08, bottom: 30),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: GoBackButton(),
               ),
             ),
           ],
