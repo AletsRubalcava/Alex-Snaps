@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class BottomNavButton extends StatelessWidget {
@@ -21,11 +22,15 @@ class BottomNavButton extends StatelessWidget {
       onTap: () {
         onNavigate(pageIndex);
       },
-      child: SvgPicture.asset(
-        icon,
-        width: iconSize,
-        colorFilter: ColorFilter.mode(Color(0xFF316163), BlendMode.srcIn),
-      ),
+      child: CircleAvatar(
+        radius: iconSize * 0.8,
+        backgroundColor: Colors.transparent,
+        child:  SvgPicture.asset(
+          icon,
+          width: iconSize,
+          colorFilter: ColorFilter.mode(Color(0xFF316163), BlendMode.srcIn),
+        ),
+      )
     );
   }
 }

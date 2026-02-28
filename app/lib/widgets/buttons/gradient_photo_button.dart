@@ -81,14 +81,15 @@ class GradientPhotoButton extends StatelessWidget {
                 return Align(
                   alignment: alignment,
                   child: Padding(
-                    padding: EdgeInsetsGeometry.only(
+                    padding: EdgeInsets.only(
                       left: leftPadding,
                       top: h * 0.70,
+
                     ),
                     child: Text(
                       text,
                       style: GoogleFonts.leagueGothic(
-                        fontSize: w * 0.18,
+                        fontSize: wider ? h * 0.18 : w * 0.18,
                         color: Colors.white,
                       ),
                     ),

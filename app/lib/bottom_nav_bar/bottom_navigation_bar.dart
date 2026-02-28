@@ -17,7 +17,7 @@ class _BottomNavBar extends State<BottomNavBar> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    final iconSize = width * 0.12;
+    final iconSize = width * 0.15;
 
     String galleryIcon = Assets.icons.layoutGrid;
     String homeIcon = Assets.icons.home;
@@ -41,7 +41,7 @@ class _BottomNavBar extends State<BottomNavBar> {
         child: Container(
           color: Theme.of(context).primaryColor,
           child: Padding(
-            padding: EdgeInsetsGeometry.symmetric(horizontal: 40),
+            padding: EdgeInsetsGeometry.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
