@@ -25,7 +25,7 @@ class GradientPhotoButton extends StatelessWidget {
         Navigator.push(
           context,
           PageRouteBuilder(
-            pageBuilder: (_, _, _) => GalleryPhotoPage(text: textGallery, category: category),
+            pageBuilder: (_, _, _) => GalleryPhotoPage(text: textGallery, categoryList: [category]),
             transitionDuration: const Duration(milliseconds: 0),
             reverseTransitionDuration: const Duration(milliseconds: 0)
           )

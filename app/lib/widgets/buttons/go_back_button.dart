@@ -10,7 +10,7 @@ class GoBackButton extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
 
     return GestureDetector(
-      onTap: () => Navigator.pop(context),
+      onTap: () => Navigator.of(context).popUntil((route) => route.isFirst),
       child: SvgPicture.asset(
               Assets.icons.arrowLeftCircle,
               colorFilter: ColorFilter.mode(

@@ -10,10 +10,10 @@ import 'package:provider/provider.dart';
 import 'package:shared/photo_class.dart';
 
 class GalleryPhotoPage extends StatefulWidget {
-  const GalleryPhotoPage({required this.category, this.text, super.key});
+  const GalleryPhotoPage({required this.categoryList, this.text, super.key});
 
   final String? text;
-  final String? category;
+  final List<String?> categoryList;
 
   @override
   State<GalleryPhotoPage> createState() => _GalleryPhotoPageState();
@@ -29,9 +29,9 @@ class _GalleryPhotoPageState extends State<GalleryPhotoPage> {
     final db = context.read<PhotoRepository>();
     final List<Photo> photo;
 
-    if (widget.category != null) {
+    if (widget.categoryList.isNotEmpty) {
       photo = db.photos.values
-          .where((photo) => photo.categories.contains(widget.category))
+          .where((photo) => photo.categories.any((category) => widget.categoryList.contains(category)))
           .toList();
     } else {
       photo = db.photos.values.toList();
@@ -60,7 +60,7 @@ class _GalleryPhotoPageState extends State<GalleryPhotoPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TitleText(text: titleText),
-                        FilterSearchButton(text: Strings.filterSearch),
+                        FilterSearchButton(text: Strings.filterSearch, aspectRatio: 8,),
                       ],
                     ),
                   ),

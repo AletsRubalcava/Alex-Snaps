@@ -1,35 +1,38 @@
+import 'package:alex_snaps/gallery/closed_filter_search_button.dart';
+import 'package:alex_snaps/gallery/opened_filter_search_button.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-class FilterSearchButton extends StatelessWidget {
+class FilterSearchButton extends StatefulWidget {
   const FilterSearchButton({
     required this.text,
+    required this.aspectRatio,
     super.key,
   });
 
   final String text;
+  final double aspectRatio;
+
+  @override
+  State<FilterSearchButton> createState() => _FilterSearchButton();
+}
+
+class _FilterSearchButton extends State<FilterSearchButton> {
+  bool showSelector = false;
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-
-    return ClipRRect(
-      borderRadius: BorderRadiusGeometry.circular(10),
-      child: AspectRatio(
-        aspectRatio: 8,
-        child: Container(
-          color: Color(0xFF343434),
-          child: Center(
-            child: Text(
-              text,
-              style: GoogleFonts.leagueGothic(
-                color: Color(0xFF626262),
-                fontSize: width * 0.07,
-              ),
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          showSelector = !showSelector;
+        });
+      },
+      child: showSelector
+          ? OpenedFilterSearchButton(aspectRatio: 16 / 9)
+          : ClosedFilterSearchButton(
+              text: widget.text,
+              aspectRatio: widget.aspectRatio,
             ),
-          ),
-        ),
-      ),
     );
   }
 }

@@ -17,7 +17,7 @@ class _BottomNavBar extends State<BottomNavBar> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    final iconSize = width * 0.15;
+    final iconSize = width * 0.13;
 
     String galleryIcon = Assets.icons.layoutGrid;
     String homeIcon = Assets.icons.home;

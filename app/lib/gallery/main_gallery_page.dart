@@ -49,7 +49,7 @@ class _MainGalleryPageListView extends State<MainGalleryPageListView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TitleText(text: Strings.galleryPageTitle),
-                        FilterSearchButton(text: Strings.filterSearch),
+                        FilterSearchButton(text: Strings.filterSearch, aspectRatio: 8),
                       ],
                     ),
                   ),
