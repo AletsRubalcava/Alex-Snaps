@@ -21,7 +21,6 @@ class AboutMeButton extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadiusGeometry.circular(20),
         child: Container(
-          height: height * 0.07,
           width: double.infinity,
           color: Color(0xFF5D5D5D),
           child: Center(

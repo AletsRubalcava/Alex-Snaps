@@ -15,44 +15,69 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
-    final dbSize = context.read<PhotoRepository>().categories.length;
-
-    double mainButtonAspectRatio = 1;
-    double secondaryButtonAspectRatio = 5 / 8;
-
-    if(dbSize == 0){
-     mainButtonAspectRatio = 11 / 17;
-    }
-    if (height < 700) {
-      mainButtonAspectRatio = 5 / 4;
-      secondaryButtonAspectRatio = 4 / 5;
-    }
-
     return Scaffold(
-      backgroundColor: Color(0xFF2D2D2D),
+      backgroundColor: const Color(0xFF2D2D2D),
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: height * 0.01,
-            left: width * 0.08,
-            right: width * 0.08,
-          ),
-          child: Column(
-            children: [
-              TitleText(text: Strings.homePageTitle),
-              MainHomeButton(mainButtonAspectRatio: mainButtonAspectRatio),
-              Spacer(),
-              HomeRowButtons(
-                secondaryButtonAspectRatio: secondaryButtonAspectRatio,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final width = constraints.maxWidth;
+            final height = constraints.maxHeight;
+            final dbSize =
+                context
+                    .read<PhotoRepository>()
+                    .categories
+                    .length;
+
+            double mainButtonAspectRatio = 1;
+            double secondaryButtonAspectRatio = 5 / 8;
+
+            if (dbSize == 0) {
+              mainButtonAspectRatio = 11 / 17;
+            }
+
+            if (height < 800) {
+              mainButtonAspectRatio = 5 / 4;
+              secondaryButtonAspectRatio = 4 / 5;
+            }
+
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: height,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.08,
+                    vertical: height * 0.02,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    spacing: (height < 700) ? 10 : 0,
+                    children: [
+                      TitleText(text: Strings.homePageTitle),
+
+                      MainHomeButton(
+                        mainButtonAspectRatio: mainButtonAspectRatio,
+                      ),
+
+                      HomeRowButtons(
+                        secondaryButtonAspectRatio:
+                        secondaryButtonAspectRatio,
+                      ),
+
+                      if (dbSize != 0)
+                        AboutMeButton(
+                          width: width,
+                          height: height,
+                          onNavigate: onNavigate,
+                        ),
+                    ],
+                  ),
+                ),
               ),
-              if(dbSize != 0) Spacer(),
-              AboutMeButton(width: width, height: height, onNavigate: onNavigate),
-              Spacer(),
-            ],
-          ),
-        )
+            );
+          },
+        ),
       ),
     );
   }

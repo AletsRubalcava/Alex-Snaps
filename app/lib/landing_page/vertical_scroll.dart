@@ -1,3 +1,4 @@
+import 'package:alex_snaps/desktop/desktop_home_screen.dart';
 import 'package:alex_snaps/horizontal_scroll.dart';
 import 'landing_page.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,13 @@ class _ScrollVertical extends State<ScrollVertical> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    final wider = width > height;
+
+    debugPrint('Width: $width');
+    debugPrint('Height: $height');
+
     return PageView(
       controller: _controller,
       scrollDirection: Axis.vertical,
@@ -26,7 +34,7 @@ class _ScrollVertical extends State<ScrollVertical> {
       children: [
         const LandingPage(),
         //HorizontalScroll receives a function as an argument
-        HorizontalScroll(
+        (width < 600 && !wider) ? HorizontalScroll(
           //A function that has index as argument
           onPageChanged: (index) {
             //Builds again the widget
@@ -38,7 +46,7 @@ class _ScrollVertical extends State<ScrollVertical> {
             });
           },
           currentPage: currentPage,
-        ),
+        ) : DesktopHomeScreen(),
       ],
     );
   }
