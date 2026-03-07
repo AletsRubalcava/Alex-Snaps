@@ -8,6 +8,9 @@ class BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final width = MediaQuery.of(context).size.width;
+
     return Container(
       height: height,
       decoration: BoxDecoration(
@@ -25,7 +28,7 @@ class BottomBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
+          if(width > 900 ) Text(
             '© ALEX SNAPS VISUALS',
             style: GoogleFonts.leagueGothic(
               fontSize: height * 0.3,
