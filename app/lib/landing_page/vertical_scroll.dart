@@ -21,9 +21,6 @@ class _ScrollVertical extends State<ScrollVertical> {
     final height = MediaQuery.of(context).size.height;
     final wider = width > height;
 
-    debugPrint('Width: $width');
-    debugPrint('Height: $height');
-
     return PageView(
       controller: _controller,
       scrollDirection: Axis.vertical,
