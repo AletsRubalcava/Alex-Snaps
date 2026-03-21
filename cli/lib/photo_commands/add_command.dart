@@ -36,11 +36,13 @@ class AddCommand extends Command {
     final categories = results.skip(1).toList();
     final newCategories = database.validateCategories(categories);
 
-    if (fileName == '.') {
+    /*if (fileName == '.') {
       _fullImport(newCategories);
       return;
     }
-    _singleImport(fileName, newCategories);
+    _singleImport(fileName, newCategories);*/
+
+    toWebp();
 
     database.save();
   }
@@ -117,5 +119,18 @@ class AddCommand extends Command {
     for (final cat in categories) {
       database.addCategoryToPhoto(id, cat, thumb);
     }
+  }
+}
+
+Future<void> toWebp() async{
+  final result = await Process.run('node', ['lib/photo_commands/webp_converter.js'],
+  workingDirectory: Directory.current.path
+  );
+
+  if(result.stdout.isNotEmpty) print(result.stdout);
+
+  if (result.exitCode != 0) {
+    print('Error: ${result.stderr}');
+    return;
   }
 }
